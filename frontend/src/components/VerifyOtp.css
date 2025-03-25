@@ -1,0 +1,88 @@
+/* Container styling for the background and centering the OTP box */
+#verify-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* background: url('./bg1.jpg') no-repeat center center fixed; Same background as Register.css */
+    background-size: cover;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Styling for the verify box with background blur effect */
+  #verify-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: rgba(28, 28, 28, 0.85);
+    /* backdrop-filter: blur(10px); */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Hover effect for box-shadow */
+  #verify-box:hover {
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.2);
+  }
+  
+  /* Gradient text for the title */
+  #title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background:  #3b82f6;
+    /* -webkit-background-clip: text; */
+    color: transparent;
+  }
+  
+  /* Styling for error message */
+  #error-message {
+    font-size: 1.1rem;
+    color: #ff4d4d;
+    margin-top: 10px;
+  }
+  
+  /* Input styling */
+  #input-group {
+    margin-top: 2vh;
+  }
+  
+  #input-group label {
+    font-size: 1rem;
+    color: #cccccc;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+  
+  #otp {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.25rem;
+    border-radius: 0.5rem;
+    background-color: #2e2e2e;
+    color: white;
+    border: 1px solid #444;
+    transition: border-color 0.3s;
+  }
+  
+  #otp:focus {
+    border-color: #00ff00;
+    outline: none;
+  }
+  
+  /* Button styling */
+  #verify-button {
+    width: 100%;
+    padding: 1rem;
+    font-weight: 600;
+    background:  #3b82f6;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  #verify-button:hover {
+    transform: scale(1.05);
+    background-color: #ff00ff;
+  }

@@ -1,0 +1,136 @@
+#register-container6 {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1d;
+    color: #e0e0e0;
+    /* background-image: url('./bg1.jpg');  */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100vh; 
+    width: 100vw; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    overflow: hidden;
+  }
+  
+  #register-card6 {
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    background: linear-gradient(145deg, #212129, #1b1b21);
+    border-radius: 12px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  #register-title6 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: transparent;
+    background:  #3b82f6;
+    background-clip: text;
+  }
+  
+  #error-message6 {
+    color: #ff4d4d;
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+  
+  #register-form6 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group label {
+    font-size: 0.875rem;
+    color: #a1a1a5;
+  }
+  
+  .form-group input {
+    width: 95%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  
+  .form-group input:focus {
+    border-color: #6d5dfc;
+  }
+  
+  #register-button1 {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background:  #3b82f6;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  #register-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.2);
+  }
+  
+  #google-button {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4285F4;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, box-shadow 0.2s;
+  }
+  
+  #google-button:hover {
+    background-color: #f8f8f8;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  #register-footer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #a0a0a5;
+  }
+  
+  #register-footer span {
+    color: #f54291;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  #register-footer span:hover {
+    text-decoration: underline;
+  }
+  
+  .blur {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+  }

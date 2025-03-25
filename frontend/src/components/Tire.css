@@ -1,0 +1,51 @@
+
+.tire-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; 
+  }
+  
+  .tire-container.visible {
+    opacity: 1;
+  }
+  
+  .tire {
+    width: 100px;
+    animation: rotate 1s forwards;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  
+  .tire-container.to-left {
+    animation: move-left 0.5s forwards;
+  }
+  
+  @keyframes move-left {
+    to {
+      transform: translate(-150%, -50%) rotate(360deg);
+    }
+  }
+  
+ 
+  .tire-container.to-right {
+    animation: move-right 0.5s forwards;
+  }
+  
+  @keyframes move-right {
+    to {
+      transform: translate(50%, -50%) rotate(360deg);
+    }
+  }
+  
