@@ -69,7 +69,7 @@ const Dashboard = () => {
         <button onClick={() => navigate(`/assignments/${encodeURIComponent(email)}`)}>Assignments</button>
         <button onClick={() => navigate(`/timetable/${encodeURIComponent(email)}`)}>Timetable</button>
         <button onClick={() => navigate('/exam')}>Events and Exam</button>
-        <button onClick={() => navigate('/pd')}>Pomodoro</button>
+        <button onClick={() => navigate('/pomodoro')}>Pomodoro</button>
         <button onClick={() => navigate('/room')}>Join Room</button>
         <button onClick={() => navigate('/room')}>Friends</button>
       </div>

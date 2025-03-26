@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import VerifyOtp from "./components/VerifyOtp";
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
+import Pomodoro from "./components/Pomodoro";
 // import Analytics from './components/Analytics';
 
 const pageTransition = {
@@ -86,6 +87,10 @@ function App() {
                 <Details email={email} />
               </motion.div>
             }
+          />
+          <Route 
+            path="/pomodoro" 
+            element={<Pomodoro />} 
           />
         </Routes>
       </AnimatePresence>
