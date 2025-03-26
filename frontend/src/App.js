@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import VerifyOtp from "./components/VerifyOtp";
 import { useState } from "react";
+import Dashboard from "./components/Dashboard";
 // import Analytics from './components/Analytics';
 
 const pageTransition = {
@@ -70,7 +71,14 @@ function App() {
               </motion.div>
             }
           />
-        
+        <Route
+            path="/dashboard"
+            element={
+              <motion.div {...pageTransition}>
+                <Dashboard email={email} />
+              </motion.div>
+            }
+          />
           <Route
             path="/details"
             element={

@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require("../models/userSchema");
 
 const submitUserDetails = async (req, res) => {
-  const { email, name, password, identifier } = req.body;
+  const { email, name,  yearOfStudy, department, college, phone, password, semester, role, identifier } = req.body;
 
   try {
     const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
@@ -13,11 +13,21 @@ const submitUserDetails = async (req, res) => {
     if (!user) {
       // If user does not exist, create a new user
       user = new User({
-        // name: name || "Anonymous",
+        name: name || "Anonymous",
         email,
         password: hashedPassword,
         role: role || "Student", // Default to Student if role is not provided
         identifier: identifier || null,
+        yearOfStudy: role === "Student" ? (yearOfStudy || "1") : undefined,
+        semester: role === "Professor" ? (semester || "1") : undefined,
+        department: department || "General Studies",
+        college: college || "Unknown College",
+        phone: phone || null,
+        assignments: { done: 0, total: 0 },
+        classes: { attended: 0, total: 0 },
+        weeksclasses: { attended: 0, total: 0 },
+        projects: { completed: 0, total: 0 },
+        timetable: [],
       });
 
       await user.save();
@@ -49,6 +59,9 @@ const submitUserDetails = async (req, res) => {
       user.yearOfStudy = undefined; // Clear yearOfStudy if user changes role to Professor
     }
 
+    user.department = department || user.department;
+    user.college = college || user.college;
+    user.phone = phone || user.phone;
     // Update password if provided and not already set
     if (password && !user.password) {
       user.password = hashedPassword;

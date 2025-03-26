@@ -25,8 +25,8 @@
     font-weight: bold;
     background:  #3b82f6;
     /* background: linear-gradient(90deg, #ec4899, #3b82f6, #10b981); */
-    /* -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     transition: transform 0.3s ease;
     cursor: pointer;
   }

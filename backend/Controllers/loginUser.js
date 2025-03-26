@@ -43,10 +43,10 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role, // Include role in the response
-        // yearOfStudy: user.yearOfStudy,
-        // department: user.department,
-        // college: user.college,
-        // phone: user.phone,
+        yearOfStudy: user.yearOfStudy,
+        department: user.department,
+        college: user.college,
+        phone: user.phone,
       },
     });
   } catch (error) {
