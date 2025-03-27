@@ -18,6 +18,26 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["Student", "Professor"],
   },
+  identifier: {
+    type: String, 
+    required: false,
+  },
+  yearOfStudy: {
+    type: String,
+  },
+  semester: {
+    type: String,
+  },
+  department: {
+    type: String,
+  },
+  college: {
+    type: String,
+  },
+  phone: {
+    type: String,
+    
+  },
   otp: {
     type: String, 
   },

@@ -9,6 +9,7 @@ import VerifyOtp from "./components/VerifyOtp";
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
 import Pomodoro from "./components/Pomodoro";
+import ProfilePage from "./components/Profile";
 // import Analytics from './components/Analytics';
 
 const pageTransition = {
@@ -88,6 +89,10 @@ function App() {
               </motion.div>
             }
           />
+          <Route
+          path="/profile"
+          element={<ProfilePage/>}
+        />
           <Route 
             path="/pomodoro" 
             element={<Pomodoro />} 
