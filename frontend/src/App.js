@@ -9,6 +9,7 @@ import VerifyOtp from "./components/VerifyOtp";
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
 import Pomodoro from "./components/Pomodoro";
+import Timetable from "./components/Timetable";
 // import Analytics from './components/Analytics';
 
 const pageTransition = {
@@ -91,6 +92,14 @@ function App() {
           <Route 
             path="/pomodoro" 
             element={<Pomodoro />} 
+          />
+          <Route
+            path="/timetable/:email"
+            element={
+              <motion.div {...pageTransition}>
+                <Timetable />
+              </motion.div>
+            }
           />
         </Routes>
       </AnimatePresence>

@@ -118,7 +118,6 @@ app.use((req, res, next) => {
 // Mount user routes
 app.use("/api/v1", user);
 
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`);
