@@ -58,7 +58,7 @@ const Dashboard = () => {
         <div className="navbar-title">Dashboard</div>
         <div className="button-container">
           <button onClick={() => setIsModalOpen(true)}>Search</button>
-          <button onClick={() => navigate('/profile')}>Profile</button>
+          <button onClick={() => navigate('/Profile')}>Profile</button>
         </div>
         {/* <img src={user} alt="User" className="user-logo" /> */}
       </nav>

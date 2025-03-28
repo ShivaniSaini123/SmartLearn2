@@ -288,3 +288,63 @@ const styles = {
     transition: "background-color 0.3s ease",
   },
 };
+// import React, { useState } from "react";
+
+// const Details = () => {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     yearOfStudy: "",
+//     semester: "",
+//     department: "",
+//     college: "",
+//     phone: "",
+//     role: "",
+//     identifier: "",
+//   });
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const response = await fetch("http://localhost:4000/api/users", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (response.ok) {
+//         alert("User details saved successfully!");
+//       } else {
+//         const errorData = await response.json();
+//         alert("Error: " + errorData.message);
+//       }
+//     } catch (error) {
+//       alert("An error occurred: " + error.message);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>Enter Your Details</h2>
+//       <form onSubmit={handleSubmit}>
+//         <input type="text" name="name" onChange={handleChange} placeholder="Name" required />
+//         <input type="email" name="email" onChange={handleChange} placeholder="Email" required />
+//         <input type="text" name="yearOfStudy" onChange={handleChange} placeholder="Year of Study" required />
+//         <input type="text" name="semester" onChange={handleChange} placeholder="Semester" required />
+//         <input type="text" name="department" onChange={handleChange} placeholder="Department" required />
+//         <input type="text" name="college" onChange={handleChange} placeholder="College" required />
+//         <input type="text" name="phone" onChange={handleChange} placeholder="Phone" required />
+//         <input type="text" name="role" onChange={handleChange} placeholder="Role (Student/Professor)" required />
+//         <input type="text" name="identifier" onChange={handleChange} placeholder="Identifier" required />
+//         <button type="submit">Save Details</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Details;
