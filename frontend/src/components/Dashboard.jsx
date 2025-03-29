@@ -67,7 +67,7 @@ const Dashboard = () => {
       <div className="navbar-vertical">
         <button onClick={() => navigate(`/attendance/${encodeURIComponent(email)}`)}>Attendance</button>
         <button onClick={() => navigate(`/assignments/${encodeURIComponent(email)}`)}>Assignments</button>
-        <button onClick={() => navigate(`/timetable/${encodeURIComponent(email)}`)}>Timetable</button>
+        <button onClick={() => navigate(`/timetable`)}>Timetable</button>
         <button onClick={() => navigate('/exam')}>Events and Exam</button>
         <button onClick={() => navigate('/pomodoro')}>Pomodoro</button>
         <button onClick={() => navigate('/room')}>Join Room</button>

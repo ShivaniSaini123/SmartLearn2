@@ -3,6 +3,7 @@ const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+//const timetableRoutes = require('./routes/timetable');
 require("dotenv").config();
 
 const app = express();
@@ -118,6 +119,7 @@ app.use((req, res, next) => {
 // Mount user routes
 app.use("/api/v1", user);
 
+//app.use('/api/timetable', timetableRoutes);
 
 // Start the server
 app.listen(PORT, () => {
