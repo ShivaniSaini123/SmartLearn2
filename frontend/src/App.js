@@ -8,8 +8,10 @@ import Register from "./components/Register";
 import VerifyOtp from "./components/VerifyOtp";
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
+import ProffDashBoard from "./components/ProffDash";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import ProffTimeTable from './components/ProffTT';
 import Pomodoro from "./components/Pomodoro";
-
 import Timetable from "./components/Timetable";
 
 import ProfilePage from "./components/Profile";
@@ -94,6 +96,14 @@ function App() {
             }
           />
           <Route
+            path="/timetable"
+            element={
+              <motion.div {...pageTransition}>
+                <Timetable email={email} />
+              </motion.div>
+            }
+          />
+          <Route
           path="/profile"
           element={<ProfilePage/>}
         />
@@ -101,14 +111,29 @@ function App() {
             path="/pomodoro" 
             element={<Pomodoro />} 
           />
+           {/* <Route
+            path="/timetable"
+            element={
+                <Timetable />
+            }
+          /> */}
           <Route
+            path="classDashBoard"
+            element={
+              <motion.div {...pageTransition}>
+                <ProffDashBoard />
+              </motion.div>
+            }
+          />
+          {/* <Route
             path="/timetable/:email"
             element={
               <motion.div {...pageTransition}>
                 <Timetable />
               </motion.div>
             }
-          />
+          /> */}
+          <Route path="/ProffTimeTable" element={<ProffTimeTable />} />
         </Routes>
       </AnimatePresence>
     </Router>

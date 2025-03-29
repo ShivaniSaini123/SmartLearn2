@@ -8,10 +8,9 @@ const Timetable = ({ semester, branch }) => {
 
   // Fetch timetable data based on semester and branch
   useEffect(() => {
-    console.log("Semester:", semester, "Branch:", branch);
     const fetchTimetable = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/getTt/${semester}/${branch}`);
+        const response = await axios.get(`http://localhost:4000/api/v1/getTt/2/CSE`);
         setTimetable(response.data);
         setLoading(false);
       } catch (error) {

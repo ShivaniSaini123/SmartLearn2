@@ -1,0 +1,173 @@
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #070108, #341335, #820c51);
+    animation: backgroundAnimation 8s infinite alternate ease-in-out;
+    background-size: 200% 200%;
+}
+
+/* Dashboard Title */
+.dashboard-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+    text-shadow: 3px 3px 15px rgba(255, 0, 255, 0.6);
+    letter-spacing: 1.5px;
+}
+
+/* Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Universal White Gradient Button */
+.dashboard-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.8));
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Hover Effect */
+.dashboard-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.2);
+    box-shadow: 0px 10px 25px rgba(255, 255, 255, 0.5);
+}
+
+/* Icons for Buttons */
+.dashboard-btn i {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Glassmorphic Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Neon Glass Modal */
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 25px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0px 0px 25px rgba(255, 0, 255, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Title */
+.modal-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 2px 2px 15px rgba(255, 0, 255, 0.6);
+}
+
+/* Form Inputs */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-input {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-input:focus {
+    outline: none;
+    border: 2px solid #ff00ff;
+    box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.7);
+}
+
+/* Modal Buttons */
+.modal-btn {
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.generate {
+    background: linear-gradient(120deg, #8a2be2, #5d00ff);
+}
+
+.generate:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px #5d00ff;
+}
+
+.close {
+    background: linear-gradient(120deg, #ff0044, #d1003a);
+}
+
+.close:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px #d1003a;
+}
+
+/* Background Animation */
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
