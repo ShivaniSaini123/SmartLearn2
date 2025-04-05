@@ -20,6 +20,9 @@ const Dashboard = () => {
 
   const getUser = async () => {
     try {
+      console.log("User Data:", userdata);
+console.log("Branch:", userdata.branch);
+
       const response = await axios.get("http://localhost:4000/api/v1/students", { withCredentials: true });
       setUserdata(response.data);
       console.log(response.data);
@@ -66,7 +69,8 @@ const Dashboard = () => {
       {/* Vertical Navbar */}
       <div className="navbar-vertical">
         <button onClick={() => navigate(`/attendance/${encodeURIComponent(email)}`)}>Attendance</button>
-        <button onClick={() => navigate(`/assignments/${encodeURIComponent(email)}`)}>Assignments</button>
+        <button onClick={() => navigate(`/assignments`)}>Assignments</button>
+
         <button onClick={() => navigate(`/timetable`)}>Timetable</button>
         <button onClick={() => navigate('/exam')}>Events and Exam</button>
         <button onClick={() => navigate('/pomodoro')}>Pomodoro</button>

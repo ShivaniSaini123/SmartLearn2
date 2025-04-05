@@ -16,6 +16,8 @@ import Timetable from "./components/Timetable";
 
 import ProfilePage from "./components/Profile";
 
+import Assignment from "./components/Assignment";
+import ProffAddAssign from './components/ProffAddAssign';
 // import Analytics from './components/Analytics';
 
 const pageTransition = {
@@ -88,6 +90,12 @@ function App() {
             }
           />
           <Route
+            path="/assignments"
+            element={
+                <Assignment />
+            }
+          />
+          <Route
             path="/details"
             element={
               <motion.div {...pageTransition}>
@@ -134,6 +142,7 @@ function App() {
             }
           /> */}
           <Route path="/ProffTimeTable" element={<ProffTimeTable />} />
+          <Route path="/proffaddassign" element={<ProffAddAssign />} />
         </Routes>
       </AnimatePresence>
     </Router>

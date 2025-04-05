@@ -1,4 +1,3 @@
-// src/contexts/EmailContext.js
 import React, { createContext, useState, useEffect } from 'react';
 
 export const EmailContext = createContext();
@@ -9,6 +8,11 @@ export const EmailProvider = ({ children }) => {
     return localStorage.getItem('userEmail') || null;
   });
 
+  const [branch, setBranch] = useState(() => {
+    // Read branch from local storage on initialization
+    return localStorage.getItem('userBranch') || null;
+  });
+
   useEffect(() => {
     if (email) {
       // Save email to local storage whenever it changes
@@ -17,10 +21,18 @@ export const EmailProvider = ({ children }) => {
       // Clear email from local storage when null
       localStorage.removeItem('userEmail');
     }
-  }, [email]);
+
+    if (branch) {
+      // Save branch to local storage whenever it changes
+      localStorage.setItem('userBranch', branch);
+    } else {
+      // Clear branch from local storage when null
+      localStorage.removeItem('userBranch');
+    }
+  }, [email, branch]);
 
   return (
-    <EmailContext.Provider value={{ email, setEmail }}>
+    <EmailContext.Provider value={{ email, setEmail, branch, setBranch }}>
       {children}
     </EmailContext.Provider>
   );

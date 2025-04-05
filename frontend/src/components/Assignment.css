@@ -1,0 +1,61 @@
+   .branch-section {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .branch-section:hover {
+    background: #0056b3;
+  }
+  
+  .back-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  
+  .back-button:hover {
+    background: #cc0000;
+  }
+  
+  .assignment-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .assignment-form input,
+  .assignment-form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .assignment-form button {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .assignment-form button:hover {
+    background: #218838;
+  }
+  

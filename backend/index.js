@@ -6,9 +6,10 @@ const cookieParser = require("cookie-parser");
 //const timetableRoutes = require('./routes/timetable');
 require("dotenv").config();
 
+
 const app = express();
 const PORT = process.env.PORT || 4000;
-
+app.use('/uploads', express.static('uploads'));
 // Import routes and database
 const user = require("./routes/user");
 const userdb = require("./models/googleSchema");
