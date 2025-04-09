@@ -75,7 +75,7 @@ console.log("Branch:", userdata.branch);
         <button onClick={() => navigate('/exam')}>Events and Exam</button>
         <button onClick={() => navigate('/pomodoro')}>Pomodoro</button>
         <button onClick={() => navigate('/room')}>Join Room</button>
-        <button onClick={() => navigate('/room')}>Friends</button>
+        <button onClick={() => navigate('/')}>Friends</button>
       </div>
       {/* Search Modal */}
       <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} className="search-modal" overlayClassName="search-overlay">

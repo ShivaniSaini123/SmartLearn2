@@ -15,7 +15,7 @@ import Pomodoro from "./components/Pomodoro";
 import Timetable from "./components/Timetable";
 
 import ProfilePage from "./components/Profile";
-
+import VideoMeetComponent from "./components/VideoMeet";
 import Assignment from "./components/Assignment";
 import ProffAddAssign from './components/ProffAddAssign';
 // import Analytics from './components/Analytics';
@@ -115,6 +115,11 @@ function App() {
           path="/profile"
           element={<ProfilePage/>}
         />
+        <Route
+          path="/room"
+          element={<VideoMeetComponent/>}
+        />
+        
           <Route 
             path="/pomodoro" 
             element={<Pomodoro />} 
