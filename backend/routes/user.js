@@ -9,6 +9,7 @@ const loginUser = require('../Controllers/loginUser');
 const verifyOtp = require('../Controllers/verifyOtp');
 const submitUserDetails = require("../Controllers/SubmitUserDetails");
 const { createOrUpdateTimetable, updateDaySchedule, getTt } = require('../Controllers/timetable.js');
+const {addTimetable,getTimetable}=require('../Controllers/exam.js');
 const userProfile = require("../Controllers/userProfile");
 // const { addAssignment } = require('../Controllers/addAssignment');
 const {addSubmission}=require('../Controllers/addSubmission.js')
@@ -30,6 +31,8 @@ router.post('/login', loginUser);
 router.post('/verify-otp', verifyOtp);
 router.post('/createOrUpdateTimetable', createOrUpdateTimetable);
 router.put('/updateDaySchedule/:semester/:branch/:day', updateDaySchedule);
+router.post('/addTimetable',addTimetable);
+router.get('/getTimetable',getTimetable);
 router.get('/getTt/:semester/:branch', getTt);
 const { getAllAssignments } = require('../Controllers/getAllAssignments');
 router.get('/assignments', getAllAssignments);

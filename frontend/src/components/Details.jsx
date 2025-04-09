@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Details = ({ email: propEmail }) => {
-
   const navigate = useNavigate();
   const location = useLocation();
-  
-  // Extract email from URL if propEmail is not provided
+
+  // Extract email from URL if not provided as a prop
   const [email, setEmail] = useState(propEmail || "");
 
   useEffect(() => {
-    
     if (!propEmail) {
       const queryParams = new URLSearchParams(location.search);
       const emailFromUrl = queryParams.get("email");
@@ -32,15 +30,24 @@ const Details = ({ email: propEmail }) => {
     identifier: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userDetails = { ...formData, email };
+    // Store semester for both & yearOfStudy only for Students
+    const userDetails = {
+      ...formData,
+      email,
+      semester: formData.semester || "1", // Ensure semester is stored
+      ...(formData.role === "Student" && { yearOfStudy: formData.yearOfStudy || "1" }) // Include yearOfStudy only for students
+    };
+
     console.log("User Details:", userDetails);
 
     try {
@@ -110,6 +117,7 @@ const Details = ({ email: propEmail }) => {
             </select>
           </div>
 
+          {/* Year of Study (Only for Students) */}
           {formData.role === "Student" && (
             <div style={styles.formGroup}>
               <label style={styles.label}>Year of Study:</label>
@@ -130,25 +138,27 @@ const Details = ({ email: propEmail }) => {
             </div>
           )}
 
-          {formData.role === "Professor" && (
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Semester:</label>
-              <select
-                name="semester"
-                value={formData.semester}
-                onChange={handleChange}
-                required
-                style={styles.select}
-              >
-                <option value="">Select Semester</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="1">3</option>
-                <option value="2">4</option>
-                <option value="1">5</option>
-              </select>
-            </div>
-          )}
+          {/* Semester (For Both Students & Professors) */}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Semester:</label>
+            <select
+              name="semester"
+              value={formData.semester}
+              onChange={handleChange}
+              required
+              style={styles.select}
+            >
+              <option value="">Select Semester</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
 
           <div style={styles.formGroup}>
             <label style={styles.label}>Department:</label>
@@ -157,8 +167,6 @@ const Details = ({ email: propEmail }) => {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              minLength={2}
-              maxLength={50}
               required
               style={styles.input}
             />
@@ -171,8 +179,6 @@ const Details = ({ email: propEmail }) => {
               name="college"
               value={formData.college}
               onChange={handleChange}
-              minLength={2}
-              maxLength={100}
               required
               style={styles.input}
             />
@@ -185,39 +191,25 @@ const Details = ({ email: propEmail }) => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              pattern="^\d{10}$"
               required
+              pattern="^\d{10}$"
               style={styles.input}
             />
           </div>
 
-          {formData.role === "Student" && (
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Student Roll Number:</label>
-              <input
-                type="text"
-                name="identifier"
-                value={formData.identifier}
-                onChange={handleChange}
-                required
-                style={styles.input}
-              />
-            </div>
-          )}
-
-          {formData.role === "Professor" && (
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Professional Identity Number:</label>
-              <input
-                type="text"
-                name="identifier"
-                value={formData.identifier}
-                onChange={handleChange}
-                required
-                style={styles.input}
-              />
-            </div>
-          )}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>
+              {formData.role === "Student" ? "Student Roll Number" : "Professional Identity Number"}
+            </label>
+            <input
+              type="text"
+              name="identifier"
+              value={formData.identifier}
+              onChange={handleChange}
+              required
+              style={styles.input}
+            />
+          </div>
 
           <button type="submit" style={styles.button}>
             Submit
@@ -229,6 +221,7 @@ const Details = ({ email: propEmail }) => {
 };
 
 export default Details;
+
 
 const styles = {
   container: {
@@ -270,6 +263,7 @@ const styles = {
     fontSize: "1rem",
     borderRadius: "4px",
     border: "1px solid #ddd",
+    color: "black"
   },
   select: {
     padding: "0.5rem",

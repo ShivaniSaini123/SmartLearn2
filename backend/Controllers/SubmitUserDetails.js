@@ -2,7 +2,9 @@ const bcrypt = require('bcryptjs');
 const User = require("../models/userSchema");
 
 const submitUserDetails = async (req, res) => {
-  const { email, name,  yearOfStudy, department, college, phone, password, semester, role, identifier } = req.body;
+  console.log("Incoming request body:", req.body);
+
+  const { email, name, yearOfStudy, department, college, phone, password, semester, role, identifier } = req.body;
 
   try {
     const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
@@ -16,10 +18,10 @@ const submitUserDetails = async (req, res) => {
         name: name || "Anonymous",
         email,
         password: hashedPassword,
-        role: role || "Student", // Default to Student if role is not provided
+        role: role || "Student",
         identifier: identifier || null,
-        yearOfStudy: role === "Student" ? (yearOfStudy || "1") : undefined,
-        semester: role === "Professor" ? (semester || "1") : undefined,
+        yearOfStudy: role === "Student" ? (yearOfStudy || "1") : undefined, // ✅ Year of Study only for Students
+        semester: semester || "1", // ✅ Semester stored for both Students & Professors
         department: department || "General Studies",
         college: college || "Unknown College",
         phone: phone || null,
@@ -29,7 +31,7 @@ const submitUserDetails = async (req, res) => {
         projects: { completed: 0, total: 0 },
         timetable: [],
       });
-
+      console.log("Final User Object before saving:", user);
       await user.save();
       return res.status(201).json({ message: "New user created successfully!" });
     }
@@ -47,21 +49,25 @@ const submitUserDetails = async (req, res) => {
     user.role = role || user.role;
     user.identifier = identifier || user.identifier;
 
-    // Update yearOfStudy if the user is a student
+    // ✅ Year of Study stored only for Students
     if (user.role === "Student") {
       user.yearOfStudy = yearOfStudy || user.yearOfStudy;
-      user.semester = undefined; // Clear semester if user changes role to Student
+    } else {
+      user.yearOfStudy = undefined; // Remove yearOfStudy if the user is not a Student
     }
 
-    // Update semester if the user is a professor
-    if (user.role === "Professor") {
-      user.semester = semester || user.semester;
-      user.yearOfStudy = undefined; // Clear yearOfStudy if user changes role to Professor
+    // ✅ Semester stored for both Students & Professors
+    if (semester !== undefined) {
+      user.semester = semester;
+    } else if (!user.semester) {
+      user.semester = "1";  // Set a default if missing
     }
+    
 
     user.department = department || user.department;
     user.college = college || user.college;
     user.phone = phone || user.phone;
+
     // Update password if provided and not already set
     if (password && !user.password) {
       user.password = hashedPassword;

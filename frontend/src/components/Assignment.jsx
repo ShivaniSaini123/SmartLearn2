@@ -39,7 +39,7 @@ const AssignmentsList = () => {
 
   return (
     <div className="assignments-container">
-      <h2 className="title">All Assignments</h2>
+      <h1 className="title">All Assignments</h1>
 
       <div className="scrollable-content">
         {Object.keys(groupedAssignments).length > 0 ? (
