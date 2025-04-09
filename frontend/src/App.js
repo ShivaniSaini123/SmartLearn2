@@ -13,6 +13,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ProffTimeTable from './components/ProffTT';
 import Pomodoro from "./components/Pomodoro";
 import Timetable from "./components/Timetable";
+import ProffExam from './components/proffExam'
+import Exam from './components/Exam'
 
 import ProfilePage from "./components/Profile";
 import VideoMeetComponent from "./components/VideoMeet";
@@ -148,6 +150,8 @@ function App() {
           /> */}
           <Route path="/ProffTimeTable" element={<ProffTimeTable />} />
           <Route path="/proffaddassign" element={<ProffAddAssign />} />
+          <Route path="/ProffExam" element={<ProffExam />} />
+          <Route path="/exam" element={<Exam />} />
         </Routes>
       </AnimatePresence>
     </Router>

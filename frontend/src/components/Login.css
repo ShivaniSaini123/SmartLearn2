@@ -80,6 +80,7 @@ body {
     padding: 0.8rem;
     border-radius: 8px;
     background: #fafafa;
+    color: black;
     border: 2px solid transparent;
     transition: border-color 0.3s;
     outline: none;
