@@ -20,8 +20,9 @@ import ProfilePage from "./components/Profile";
 import VideoMeetComponent from "./components/VideoMeet";
 import Assignment from "./components/Assignment";
 import ProffAddAssign from './components/ProffAddAssign';
-// import Analytics from './components/Analytics';
 
+import AddSyllabus from "./components/AddSyllabus";
+import StudyMaterials from "./components/StudyMaterials";
 const pageTransition = {
   initial: { opacity: 0, x: 200, scale: 0.95 },
   animate: { opacity: 1, x: 0, scale: 1 },
@@ -98,6 +99,14 @@ function App() {
             }
           />
           <Route
+            path="/studymaterials"
+            element={
+              <motion.div {...pageTransition}>
+                <StudyMaterials />
+              </motion.div>
+            }
+          />
+          <Route
             path="/details"
             element={
               <motion.div {...pageTransition}>
@@ -148,6 +157,7 @@ function App() {
               </motion.div>
             }
           /> */}
+          <Route path="/AddSyllabus" element={<AddSyllabus />} />
           <Route path="/ProffTimeTable" element={<ProffTimeTable />} />
           <Route path="/proffaddassign" element={<ProffAddAssign />} />
           <Route path="/ProffExam" element={<ProffExam />} />

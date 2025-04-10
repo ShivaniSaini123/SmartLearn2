@@ -49,6 +49,9 @@ const ProffDashBoard = () => {
         <button onClick={handleMarkAttendance} className="dashboard-btn">
           <i className="fas fa-user-check"></i> Mark Attendance
         </button>
+        <button onClick={() => handleNavigation("/AddSyllabus")} className="dashboard-btn">
+          <i className="fas fa-book"></i> Add Syllabus
+        </button>
       </div>
 
       {isModalOpen && (

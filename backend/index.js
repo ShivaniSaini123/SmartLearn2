@@ -119,6 +119,8 @@ app.use((req, res, next) => {
 
 // Mount user routes
 app.use("/api/v1", user);
+const syllabusRoutes = require('./routes/user');
+app.use('/api', syllabusRoutes); 
 
 //app.use('/api/timetable', timetableRoutes);
 
