@@ -3,6 +3,8 @@ const upload = multer({ dest: 'uploads/' });
 const express = require('express'); // Import multer for file uploads
 const path = require('path');
 
+// const { saveOtp, markAttendance } = require("../Controllers/attendance");
+const { markAttendance, saveOtp, viewAttendance } = require("../Controllers/attendance");
 const router = express.Router();
 const registerUser = require('../Controllers/registerUser');
 const loginUser = require('../Controllers/loginUser');
@@ -15,7 +17,8 @@ const userProfile = require("../Controllers/userProfile");
 const {addSubmission}=require('../Controllers/addSubmission.js')
 const { submitAssignment } = require('../Controllers/submitAssignment.js');
 const { addAssignmentProff } = require('../Controllers/addAssignmentProff.js');
-const goalController = require('../Controllers/Goals');
+const {addSyllabus}=require('../Controllers/addSyllabus');
+const syllabusController = require('../Controllers/syllabusController');const goalController = require('../Controllers/Goals');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -41,6 +44,12 @@ router.post('/assignment',addSubmission)
 router.post('/submit', submitAssignment);
 router.get('/profile/:email', userProfile);
 router.post('/addAssignmentProff', addAssignmentProff);
+router.post('/syllabus',addSyllabus);
+router.use('/api', syllabusController);
+router.post('/attendance', saveOtp);
+router.post('/mark', markAttendance);
+router.post('/view-attendance', viewAttendance);
+
 router.post('/goals', goalController.createGoal);
 router.get('/goals/:userId', goalController.getGoalsByUser);
 router.put('/goals/:id', goalController.updateGoal);

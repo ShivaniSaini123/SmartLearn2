@@ -1,0 +1,65 @@
+/* AttendanceForm Styling */
+.attendance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(135deg, #1c1c1c, #383838);
+    font-family: 'Urbanist', sans-serif;
+  }
+  
+  .attendance-box {
+    width: 100%;
+    max-width: 500px;
+    background-color: #212121;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
+  
+  .attendance-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .attendance-box input[type="text"] {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    outline: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .attendance-box input[type="text"]:focus {
+    background-color: #444;
+  }
+  
+  .attendance-box button {
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #00ffff, #ff007f);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .attendance-box button:hover {
+    background: linear-gradient(90deg, #ff007f, #00ffff);
+    transform: scale(1.05);
+  }
+  
+  .attendance-box p {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+    color: #d2b48c;
+  }
+  

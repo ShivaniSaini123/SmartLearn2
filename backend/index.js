@@ -119,6 +119,10 @@ app.use((req, res, next) => {
 
 // Mount user routes
 app.use("/api/v1", user);
+const syllabusRoutes = require('./routes/user');
+app.use('/api', syllabusRoutes); 
+const attendanceRoutes = require('./routes/user');
+app.use('/api/v1', attendanceRoutes);
 
 // Example Express route
 app.get('/api/v1/goals/:userId', (req, res) => {

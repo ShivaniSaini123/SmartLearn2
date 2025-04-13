@@ -14,8 +14,29 @@
 //         process.exit(1);
 //     } );
 // }
+// const mongoose = require("mongoose");
+// require("dotenv").config(); // Ensure this is present
+
+// exports.connect = async () => {
+//   try {
+//     const uri = process.env.MONGO_URI;
+//     if (!uri) {
+//       throw new Error("MongoDB URI is missing from .env file");
+//     }
+
+//     await mongoose.connect(uri, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+
+//     console.log("Database connected successfully");
+//   } catch (err) {
+//     console.error("DB CONNECTION ISSUES", err);
+//     process.exit(1);
+//   }
+// };
 const mongoose = require("mongoose");
-require("dotenv").config(); // Ensure this is present
+require("dotenv").config(); // Ensures .env is loaded
 
 exports.connect = async () => {
   try {
@@ -24,14 +45,11 @@ exports.connect = async () => {
       throw new Error("MongoDB URI is missing from .env file");
     }
 
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(uri); // No need for deprecated options
 
-    console.log("Database connected successfully");
+    console.log("✅ Database connected successfully");
   } catch (err) {
-    console.error("DB CONNECTION ISSUES", err);
-    process.exit(1);
+    console.error("❌ DB CONNECTION ISSUES:", err);
+    process.exit(1); // Exit if connection fails
   }
 };

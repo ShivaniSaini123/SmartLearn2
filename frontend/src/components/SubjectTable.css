@@ -1,0 +1,98 @@
+#table31 {
+    width: 80%;
+    max-width: 1000px;
+    table-layout: fixed;
+    background: #FFF4E6;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#subject-name-header31,
+#credits-header31,
+#expected-grade-header31 {
+    padding: 16px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+    background-color: #FFCE6B;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    border-right: solid 1px rgba(0, 0, 0, 0.05);
+}
+
+.td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 400;
+    font-size: 14px;
+    color: #555;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    border-right: solid 1px rgba(0, 0, 0, 0.05);
+    background-color: #FFF9E1;
+}
+
+.td:last-child,
+#subject-name-header31:last-child,
+#credits-header31:last-child,
+#expected-grade-header31:last-child {
+    border-right: none;
+}
+
+.table tr:hover .td {
+    background-color: #FFE8B6;
+    transition: background-color 0.3s ease;
+}
+
+#section31 {
+    margin: 40px auto;
+    height: 400px;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: #FFF4E6;
+}
+
+#section31::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#section31::-webkit-scrollbar-track {
+    background: #FFE8B6;
+    border-radius: 10px;
+}
+
+#section31::-webkit-scrollbar-thumb {
+    background: #FFCE6B;
+    border-radius: 10px;
+}
+
+#section31::-webkit-scrollbar-thumb:hover {
+    background: #E0AC47;
+}
+
+@media only screen and (max-width: 728px) {
+    #table31 {
+        width: 100%;
+    }
+    
+    #subject-name-header31, 
+    #credits-header31, 
+    #expected-grade-header31, 
+    .td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    #section31 {
+        margin: 20px;
+        height: auto;
+    }
+}

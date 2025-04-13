@@ -60,7 +60,13 @@
     font-size: 1.5rem;
     color: #555;
 }
-
+.otp-container {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
 /* Glassmorphic Modal Overlay */
 .modal-overlay {
     position: fixed;
@@ -75,7 +81,7 @@
 /* Neon Glass Modal */
 .modal-content {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
+    /* backdrop-filter: blur(20px); */
     padding: 25px;
     border-radius: 12px;
     width: 400px;
