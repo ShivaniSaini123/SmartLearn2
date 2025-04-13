@@ -23,6 +23,7 @@ import ProffAddAssign from './components/ProffAddAssign';
 
 import AddSyllabus from "./components/AddSyllabus";
 import StudyMaterials from "./components/StudyMaterials";
+import AttendanceForm from "./components/AttendanceForm";
 const pageTransition = {
   initial: { opacity: 0, x: 200, scale: 0.95 },
   animate: { opacity: 1, x: 0, scale: 1 },
@@ -162,6 +163,7 @@ function App() {
           <Route path="/proffaddassign" element={<ProffAddAssign />} />
           <Route path="/ProffExam" element={<ProffExam />} />
           <Route path="/exam" element={<Exam />} />
+          <Route path="/attendance/:email" element={<AttendanceForm />} />
         </Routes>
       </AnimatePresence>
     </Router>

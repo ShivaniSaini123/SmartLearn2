@@ -121,6 +121,8 @@ app.use((req, res, next) => {
 app.use("/api/v1", user);
 const syllabusRoutes = require('./routes/user');
 app.use('/api', syllabusRoutes); 
+const attendanceRoutes = require('./routes/user');
+app.use('/api/v1', attendanceRoutes);
 
 //app.use('/api/timetable', timetableRoutes);
 

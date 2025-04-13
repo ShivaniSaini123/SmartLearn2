@@ -3,6 +3,8 @@ const upload = multer({ dest: 'uploads/' });
 const express = require('express'); // Import multer for file uploads
 const path = require('path');
 
+// const { saveOtp, markAttendance } = require("../Controllers/attendance");
+const { markAttendance, saveOtp, viewAttendance } = require("../Controllers/attendance");
 const router = express.Router();
 const registerUser = require('../Controllers/registerUser');
 const loginUser = require('../Controllers/loginUser');
@@ -43,4 +45,8 @@ router.get('/profile/:email', userProfile);
 router.post('/addAssignmentProff', addAssignmentProff);
 router.post('/syllabus',addSyllabus);
 router.use('/api', syllabusController);
+router.post('/attendance', saveOtp);
+router.post('/mark', markAttendance);
+router.post('/view-attendance', viewAttendance);
+
 module.exports = router;
