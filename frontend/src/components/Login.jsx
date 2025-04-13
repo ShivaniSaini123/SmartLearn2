@@ -25,10 +25,19 @@ const Login = () => {
       const responseData = await response.json();
       console.log(responseData); // Log the full response object
       console.log("Before:", responseData?.data?.role); // Log the role inside the 'data' object
-  
+      
       if (response.ok) {
         setEmails(email);
         localStorage.setItem("userEmail", email);
+        localStorage.setItem("user", JSON.stringify({
+          id: responseData.data._id,
+          email: responseData.data.email,
+          role: responseData.data.role,
+          college: responseData.data.college,
+          department: responseData.data.department,
+          phone: responseData.data.phone,
+          yearOfStudy: responseData.data.yearOfStudy
+        }));
   
         const role = responseData?.data?.role || "Student"; // Access role from responseData.data
         console.log("Role is:", role); // Log the resolved role

@@ -18,7 +18,8 @@ const {addSubmission}=require('../Controllers/addSubmission.js')
 const { submitAssignment } = require('../Controllers/submitAssignment.js');
 const { addAssignmentProff } = require('../Controllers/addAssignmentProff.js');
 const {addSyllabus}=require('../Controllers/addSyllabus');
-const syllabusController = require('../Controllers/syllabusController');
+const syllabusController = require('../Controllers/syllabusController');const goalController = require('../Controllers/Goals');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/assignments/'); // Store files in 'uploads/assignments'
@@ -49,4 +50,8 @@ router.post('/attendance', saveOtp);
 router.post('/mark', markAttendance);
 router.post('/view-attendance', viewAttendance);
 
+router.post('/goals', goalController.createGoal);
+router.get('/goals/:userId', goalController.getGoalsByUser);
+router.put('/goals/:id', goalController.updateGoal);
+router.delete('/goals/:id', goalController.deleteGoal);
 module.exports = router;

@@ -20,6 +20,7 @@ import ProfilePage from "./components/Profile";
 import VideoMeetComponent from "./components/VideoMeet";
 import Assignment from "./components/Assignment";
 import ProffAddAssign from './components/ProffAddAssign';
+import GoalForm from './components/Goals';
 
 import AddSyllabus from "./components/AddSyllabus";
 import StudyMaterials from "./components/StudyMaterials";
@@ -164,6 +165,27 @@ function App() {
           <Route path="/ProffExam" element={<ProffExam />} />
           <Route path="/exam" element={<Exam />} />
           <Route path="/attendance/:email" element={<AttendanceForm />} />
+          <Route
+            path="/goals"
+            element={
+              <motion.div {...pageTransition}>
+                <GoalForm onAddGoal={async (goalData) => {
+                  try {
+                    const res = await fetch("http://localhost:4000/api/goals", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ ...goalData, userId: email }), // Assuming `email` maps to userId in backend
+                    });
+                    if (!res.ok) throw new Error("Failed to add goal");
+                    const data = await res.json();
+                    console.log("Goal added:", data);
+                  } catch (err) {
+                    console.error(err);
+                  }
+                }} />
+              </motion.div>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </Router>
