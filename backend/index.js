@@ -120,7 +120,17 @@ app.use((req, res, next) => {
 // Mount user routes
 app.use("/api/v1", user);
 
-//app.use('/api/timetable', timetableRoutes);
+// Example Express route
+app.get('/api/v1/goals/:userId', (req, res) => {
+  const { userId } = req.params;
+  const { date } = req.query;
+
+  // Process the request and fetch goals for the user
+  Goal.find({ userId, deadline: date })
+    .then((goals) => res.json({ data: goals }))
+    .catch((error) => res.status(500).json({ error: error.message }));
+});
+
 
 // Start the server
 app.listen(PORT, () => {

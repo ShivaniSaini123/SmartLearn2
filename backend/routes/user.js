@@ -15,6 +15,7 @@ const userProfile = require("../Controllers/userProfile");
 const {addSubmission}=require('../Controllers/addSubmission.js')
 const { submitAssignment } = require('../Controllers/submitAssignment.js');
 const { addAssignmentProff } = require('../Controllers/addAssignmentProff.js');
+const goalController = require('../Controllers/Goals');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -40,4 +41,8 @@ router.post('/assignment',addSubmission)
 router.post('/submit', submitAssignment);
 router.get('/profile/:email', userProfile);
 router.post('/addAssignmentProff', addAssignmentProff);
+router.post('/goals', goalController.createGoal);
+router.get('/goals/:userId', goalController.getGoalsByUser);
+router.put('/goals/:id', goalController.updateGoal);
+router.delete('/goals/:id', goalController.deleteGoal);
 module.exports = router;
