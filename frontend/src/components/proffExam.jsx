@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './proffExam.css';
 
 const ProffExam = () => {
   const [branch, setBranch] = useState('');
@@ -53,17 +54,13 @@ const ProffExam = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-gray-100 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-extrabold mb-6 text-center text-blue-600">Exam Timetable Management</h2>
+    <div className="container">
+      <h2 className="heading">Exam Timetable Management</h2>
 
-      <form className="space-y-6 mb-8">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Branch:</label>
-          <select
-            value={branch}
-            onChange={handleBranchChange}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
-          >
+      <form className="form-section">
+        <div className="form-group">
+          <label>Branch:</label>
+          <select value={branch} onChange={handleBranchChange}>
             <option value="">Select Branch</option>
             <option value="CSE">CSE</option>
             <option value="ECE">ECE</option>
@@ -73,91 +70,74 @@ const ProffExam = () => {
           </select>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Semester:</label>
+        <div className="form-group">
+          <label>Semester:</label>
           <input
             type="number"
             value={semester}
             onChange={handleSemesterChange}
             placeholder="Enter semester number"
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
           />
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-gray-800">Exams</h3>
+          <h3 className="section-title">Exams</h3>
           {exams.map((exam, index) => (
-            <div key={index} className="mt-4 p-4 border rounded-md bg-white shadow-sm space-y-2">
+            <div key={index} className="exam-card">
               <input
                 type="text"
                 placeholder="Subject"
                 value={exam.subject}
                 onChange={(e) => handleExamChange(index, 'subject', e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
               />
-
               <input
                 type="date"
                 value={exam.date}
                 onChange={(e) => handleExamChange(index, 'date', e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
               />
-
-              <div className="flex space-x-2">
+              <div className="time-inputs">
                 <input
                   type="time"
                   value={exam.startTime}
                   onChange={(e) => handleExamChange(index, 'startTime', e.target.value)}
-                  className="w-1/2 border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
                 />
                 <input
                   type="time"
                   value={exam.endTime}
                   onChange={(e) => handleExamChange(index, 'endTime', e.target.value)}
-                  className="w-1/2 border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-300"
                 />
               </div>
             </div>
           ))}
-          <button
-            type="button"
-            onClick={addExamRow}
-            className="mt-4 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
-          >
+          <button type="button" className="add-btn" onClick={addExamRow}>
             Add Another Exam
           </button>
         </div>
 
-        <button
-          onClick={handleAddTimetable}
-          className="w-full mt-6 py-3 text-lg font-semibold text-white bg-green-500 rounded-md hover:bg-green-600"
-        >
+        <button className="submit-btn" onClick={handleAddTimetable}>
           Submit Timetable
         </button>
       </form>
 
-      <form className="text-center">
-        <h2 className="text-xl font-bold mb-4">Get Timetable</h2>
-        <button
-          onClick={handleGetTimetable}
-          className="w-full py-3 text-lg font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
-        >
+      <form className="fetch-form">
+        <h2>Get Timetable</h2>
+        <button className="fetch-btn" onClick={handleGetTimetable}>
           Fetch Timetable
         </button>
       </form>
 
       {timetable && (
-        <div className="mt-8 p-6 border rounded-md bg-white shadow-lg">
-          <h3 className="text-lg font-bold mb-4 text-center text-blue-700">
+        <div className="timetable-display">
+          <h3>
             Timetable for {timetable.branch}, Semester {timetable.semester}
           </h3>
-          <div className="space-y-4">
+          <div className="exam-list">
             {timetable.exams.map((exam, index) => (
-              <div key={index} className="p-4 border-b border-gray-200">
-                <p className="text-sm font-medium">Subject: {exam.subject}</p>
-                <p className="text-sm">Date: {new Date(exam.date).toLocaleDateString()}</p>
-                <p className="text-sm">Start Time: {exam.startTime}</p>
-                <p className="text-sm">End Time: {exam.endTime}</p>
+              <div key={index} className="exam-item">
+                <p><strong>Subject:</strong> {exam.subject}</p>
+                <p><strong>Date:</strong> {new Date(exam.date).toLocaleDateString()}</p>
+                <p><strong>Start Time:</strong> {exam.startTime}</p>
+                <p><strong>End Time:</strong> {exam.endTime}</p>
               </div>
             ))}
           </div>

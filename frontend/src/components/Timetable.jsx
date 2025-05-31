@@ -27,7 +27,7 @@ const Timetable = ({ semester, branch }) => {
 
   return (
     <div className="timetable-container" id="timetable-container27">
-      <h2 id="timetable-header27">Timetable for {semester} - {branch}</h2>
+      <h2 id="timetable-header27">Timetable</h2>
 
       <div className="timetable-grid" id="timetable-grid27">
         {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {

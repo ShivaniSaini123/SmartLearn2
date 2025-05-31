@@ -1,0 +1,122 @@
+/* Glassy Timetable Style */
+
+.timetable-page {
+  background: linear-gradient(120deg, #1c0036, #0d0221);
+  min-height: 100vh;
+  padding: 20px;
+  color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timetable-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.timetable-title {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #ffde59;
+  margin-bottom: 15px;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00dbde;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-input.small {
+  margin-bottom: 8px;
+}
+
+/* Section Cards */
+.section-card {
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #ffc300;
+}
+
+/* Subject Card */
+.subject-card {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Buttons */
+.form-button {
+  width: 100%;
+  padding: 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.form-button.add {
+  background: #ffe600;
+  color: #000;
+}
+
+.form-button.update {
+  background: #00dbde;
+  color: #000;
+}
+
+.form-button.submit {
+  background: #da70d6;
+  color: #000;
+}
+
+.form-button:hover {
+  opacity: 0.9;
+}
+
+.mt {
+  margin-top: 30px;
+}
