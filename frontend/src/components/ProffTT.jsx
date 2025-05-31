@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./ProffTT.css";
 
 const initialSubjectState = { subjectName: "", startTime: "", endTime: "", location: "" };
 
@@ -45,90 +46,68 @@ const ProffTimeTable = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white p-6">
-      <div className="w-full max-w-3xl bg-gray-800 p-6 rounded-lg shadow-lg overflow-y-auto">
-        <h2 className="text-3xl font-bold text-center mb-6 text-yellow-400">Timetable Form</h2>
+<div className="timetable-page">
+  <div className="timetable-container">
+    <h2 className="timetable-title">Timetable Form</h2>
 
-        {/* Branch Selection */}
-        <div className="mb-4">
-          <label className="block text-lg mb-2">Branch:</label>
-          <select
-            className="w-full p-2 border rounded-lg bg-gray-700 text-white"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
-          >
-            {["CSE", "ME", "EE", "ECE", "CHE", "BE"].map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Semester Selection */}
-        <div className="mb-4">
-          <label className="block text-lg mb-2">Semester:</label>
-          <select
-            className="w-full p-2 border rounded-lg bg-gray-700 text-white"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-          >
-            {["1", "2", "3"].map((s) => (
-              <option key={s} value={s}>
-                Semester {s}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Update Specific Day */}
-        <div className="p-4 border rounded-lg bg-gray-700 text-white shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-yellow-300">Update Specific Day</h3>
-          <label className="block text-lg mb-2">Day:</label>
-          <select
-            className="w-full p-2 border rounded-lg bg-gray-600 text-white mb-4"
-            value={day}
-            onChange={(e) => setDay(e.target.value)}
-          >
-            {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((d) => (
-              <option key={d} value={d}>
-                {d.charAt(0).toUpperCase() + d.slice(1)}
-              </option>
-            ))}
-          </select>
-
-          {subjects.map((subject, index) => (
-            <div key={index} className="mb-4">
-              {["subjectName", "startTime", "endTime", "location"].map((field) => (
-                <input
-                  key={field}
-                  type="text"
-                  placeholder={field.replace(/([A-Z])/g, " $1").trim()}
-                  className="w-full p-2 mb-2 border rounded-lg bg-gray-600 text-white"
-                  value={subject[field]}
-                  onChange={(e) => handleInputChange(e, index, field)}
-                />
-              ))}
-            </div>
-          ))}
-
-          <button className="w-full bg-yellow-500 text-gray-900 font-bold p-2 rounded-lg mb-2" onClick={addSubjectField}>
-            Add Subject
-          </button>
-          <button className="w-full bg-green-500 text-gray-900 font-bold p-2 rounded-lg" onClick={handleDayUpdate}>
-            Update Day
-          </button>
-        </div>
-
-        {/* Submit Entire Timetable */}
-        <div className="p-4 border rounded-lg bg-gray-700 text-white shadow-lg mt-6">
-          <h3 className="text-xl font-semibold mb-4 text-yellow-300">Submit Entire Timetable</h3>
-          <button className="w-full bg-purple-500 text-gray-900 font-bold p-2 rounded-lg" onClick={handleTimetableSubmit}>
-            Submit Timetable
-          </button>
-        </div>
-      </div>
+    {/* Branch Select */}
+    <div className="form-group">
+      <label>Branch:</label>
+      <select className="form-input" value={branch} onChange={(e) => setBranch(e.target.value)}>
+        {["CSE", "ME", "EE", "ECE", "CHE", "BE"].map((b) => (
+          <option key={b} value={b}>{b}</option>
+        ))}
+      </select>
     </div>
+
+    {/* Semester Select */}
+    <div className="form-group">
+      <label>Semester:</label>
+      <select className="form-input" value={semester} onChange={(e) => setSemester(e.target.value)}>
+        {["1", "2", "3"].map((s) => (
+          <option key={s} value={s}>Semester {s}</option>
+        ))}
+      </select>
+    </div>
+
+    {/* Day Update Section */}
+    <div className="section-card">
+      <h3 className="section-title">Update Specific Day</h3>
+
+      <label>Day:</label>
+      <select className="form-input" value={day} onChange={(e) => setDay(e.target.value)}>
+        {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((d) => (
+          <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
+        ))}
+      </select>
+
+      {subjects.map((subject, index) => (
+        <div key={index} className="subject-card">
+          {["subjectName", "startTime", "endTime", "location"].map((field) => (
+            <input
+              key={field}
+              type="text"
+              className="form-input small"
+              placeholder={field.replace(/([A-Z])/g, " $1").trim()}
+              value={subject[field]}
+              onChange={(e) => handleInputChange(e, index, field)}
+            />
+          ))}
+        </div>
+      ))}
+
+      <button className="form-button add" onClick={addSubjectField}>Add Subject</button>
+      <button className="form-button update" onClick={handleDayUpdate}>Update Day</button>
+    </div>
+
+    {/* Submit Full Timetable */}
+    <div className="section-card mt">
+      <h3 className="section-title">Submit Entire Timetable</h3>
+      <button className="form-button submit" onClick={handleTimetableSubmit}>Submit Timetable</button>
+    </div>
+  </div>
+</div>
+
   );
 };
 
