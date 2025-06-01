@@ -1,69 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import './VerifyOtp.css';
 
 const VerifyOtp = ({ email }) => {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(new Array(6).fill(""));
   const [error, setError] = useState("");
+  const inputsRef = useRef([]);
   const navigate = useNavigate();
+
+  const handleChange = (element, index) => {
+    const value = element.value.replace(/\D/, ""); // Allow only digits
+    if (!value) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (index < 5) {
+      inputsRef.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      const newOtp = [...otp];
+      newOtp[index - 1] = "";
+      setOtp(newOtp);
+      inputsRef.current[index - 1].focus();
+    }
+  };
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
+    const otpCode = otp.join("");
     try {
-      console.log("Sending OTP verification request for:", { email, otp });
       const response = await fetch("http://localhost:4000/api/v1/verify-otp", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, otp }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp: otpCode }),
       });
-      console.log("Response status:", response.status);
       const data = await response.json();
-      console.log("data is:", data);
-
       if (response.ok) {
-        navigate("/details"); 
+        navigate("/details");
       } else {
         setError(data.message || "Verification failed, please try again");
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred. Please try again later.");
     }
   };
 
   return (
-    <div id="verify-container" className="flex items-center justify-center min-h-screen bg-cover bg-center text-white">
-      <div id="verify-box" className="w-full max-w-lg p-8 space-y-6 bg-black/70 backdrop-blur-md rounded-lg shadow-lg">
-        <h2 id="title" className="text-3xl font-semibold text-center text-gradient">
-          Verify OTP
-        </h2>
+    <div id="verify-container">
+      <div id="verify-box">
+        <h2 id="title">Verify Your Email</h2>
+        <p className="text-gray-300 mb-4">Please Enter The Verification Code We Sent To <br /><b>{email}</b></p>
 
-        {error && <p id="error-message" className="text-red-500 text-center">{error}</p>}
+        {error && <p id="error-message">{error}</p>}
 
         <form onSubmit={handleVerifyOtp} className="space-y-6">
-          <div id="input-group">
-            <label htmlFor="otp" className="block text-sm font-medium text-gray-300">Enter OTP</label>
-            
-            <input
-              type="text"
-              id="otp"
-              
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              required
-              pattern="\d{6}"
-              className="w-full px-4 py-2 mt-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
+          <div className="otp-inputs">
+            {otp.map((digit, i) => (
+              <input
+                key={i}
+                type="text"
+                maxLength="1"
+                value={digit}
+                onChange={(e) => handleChange(e.target, i)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                ref={(el) => (inputsRef.current[i] = el)}
+                className="otp-box"
+              />
+            ))}
           </div>
-
-          <button
-            type="submit"
-            id="verify-button"
-            className="w-full py-3 font-medium text-white bg-gradient-to-r from-pink-500 to-blue-500 rounded-lg transition-all duration-300 transform hover:scale-105"
-          >
-            Verify OTP
-          </button>
+          <button type="submit" id="verify-button">Confirm</button>
         </form>
       </div>
     </div>

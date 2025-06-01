@@ -60,9 +60,9 @@ body, html {
 .navbar-horizontal {
   position: fixed;
   top: 0;
-  /* left: 250px; */
+  left: 1px;
   width: 100%;
-  background-color: #0f3460;
+  background-color:  rgba(3, 3, 3, 0.85); 
   color: white;
   padding: 15px 20px;
   display: flex;

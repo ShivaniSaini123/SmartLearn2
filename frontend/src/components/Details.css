@@ -1,0 +1,91 @@
+/* Fullscreen Centered Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* background: linear-gradient(to right, #1a0533, #2e0854); Dark theme */
+  padding: 1rem;
+   background: linear-gradient(135deg, #1b0033, #2e004f);
+  box-sizing: border-box;
+}
+
+/* Card Box */
+.formCard {
+  padding: 2rem 4rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  /* width: 100%; */
+  max-width: 1200px;
+}
+
+
+
+/* Title */
+.details-heading {
+  font-size: 1.8rem;
+  /* margin-bottom: 1.5rem; */
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Form Grid */
+.details-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+}
+
+
+/* Group Wrapper */
+.formGroup,
+.details-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.label,
+.details-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Inputs & Selects */
+.input,
+.select {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #1e1e2f;
+  color: white;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.input:focus,
+.select:focus {
+  box-shadow: 0 0 0 2px #9333ea;
+}
+
+/* Submit Button */
+.button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  background: linear-gradient(to right, #ff00ff, #3b82f6);
+}

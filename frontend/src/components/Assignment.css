@@ -17,7 +17,7 @@
 
 .branch-section:hover {
   background: linear-gradient(135deg, #4a0099, #220045);
-  transform: translateY(-5px) scale(1.04);
+  transform: translateY(-6px) scale(1.05);
   filter: brightness(1.2);
   box-shadow: 0 14px 34px rgba(255, 0, 255, 0.55);
 }
@@ -27,7 +27,7 @@
   display: inline-block;
   margin: 30px auto;
   padding: 16px 36px;
-  background: linear-gradient(135deg, #ff0044, #b3002d);
+  background: linear-gradient(135deg, #ff0077, #ff00cc);
   color: white;
   border: none;
   cursor: pointer;
@@ -35,28 +35,30 @@
   font-weight: 700;
   border-radius: 14px;
   transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
-  box-shadow: 0 6px 18px rgba(255, 0, 85, 0.4);
+  box-shadow: 0 6px 18px rgba(255, 0, 170, 0.4);
 }
 
 .back-button:hover {
-  background: linear-gradient(135deg, #cc0033, #80001f);
+  background: linear-gradient(135deg, #cc0070, #aa00aa);
   transform: scale(1.08);
-  box-shadow: 0 10px 30px rgba(255, 0, 85, 0.6);
+  box-shadow: 0 10px 30px rgba(255, 0, 170, 0.6);
 }
 
 /* Assignment Form Styles */
 .assignment-form {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(15px);
+  background: rgba(30, 0, 60, 0.6);
+  backdrop-filter: blur(16px);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0px 12px 35px rgba(255, 0, 255, 0.2);
+  box-shadow: 0 12px 35px rgba(255, 0, 255, 0.25);
   max-width: 720px;
   margin: 40px auto;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   animation: fadeInUp 0.8s ease both;
+  color: white;
 }
 
+/* Inputs */
 .assignment-form input,
 .assignment-form textarea {
   display: block;
@@ -64,38 +66,38 @@
   padding: 16px 20px;
   margin-bottom: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 17px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: white;
   transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .assignment-form input:focus,
 .assignment-form textarea:focus {
-  border-color: #ff00ff;
+  border-color: #d000ff;
   outline: none;
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0px 0px 14px rgba(255, 0, 255, 0.6);
+  box-shadow: 0 0 14px rgba(255, 0, 255, 0.5);
 }
 
-/* Form Button */
+/* Submit Button */
 .assignment-form button {
-  background: linear-gradient(135deg, #00ffaa, #00d4ff);
-  color: #000;
+  background: linear-gradient(135deg, #00f0ff, #ff00ff);
+  color: #fff;
   padding: 16px 32px;
   border: none;
   cursor: pointer;
   font-size: 19px;
   font-weight: bold;
-  border-radius: 12px;
+  border-radius: 14px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 10px 20px rgba(0, 255, 200, 0.45);
+  box-shadow: 0 10px 22px rgba(0, 255, 255, 0.4);
 }
 
 .assignment-form button:hover {
   transform: scale(1.07);
-  box-shadow: 0px 14px 30px rgba(0, 255, 200, 0.7);
+  box-shadow: 0 14px 30px rgba(0, 255, 255, 0.65);
 }
 
 /* Fade In Animation */
@@ -127,4 +129,3 @@
     padding: 18px;
   }
 }
-

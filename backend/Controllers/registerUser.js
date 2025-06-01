@@ -39,39 +39,6 @@ const registerUser = async (req, res) => {
       otp,
       otpExpiresAt,
       isVerified: false,
-    //   quiz: {
-    //     questionsAttempted: 0,
-    //     questionsCorrect: 0
-    //   },
-    //   problemSolving: {
-    //     solved: 0
-    //   },
-    //   contests: {
-    //     given: 0
-    //   },
-    //   sessions: {
-    //     count: 0
-    //   },
-    //   AnalysisOfAlgorithms:{
-    //     totalClass:0,
-    //     attendedClass:0
-    //   },
-    //   OperationResearch:{
-    //     totalClass:0,
-    //     attendedClass:0
-    //   },
-    //   ComputerArchitecture:{
-    //     totalClass:0,
-    //     attendedClass:0
-    //   },
-    //   Oops:{
-    //     totalClass:0,
-    //     attendedClass:0
-    //   },
-    //   AutomataTheory:{
-    //     totalClass:0,
-    //     attendedClass:0
-    //   },
 
     });
 
