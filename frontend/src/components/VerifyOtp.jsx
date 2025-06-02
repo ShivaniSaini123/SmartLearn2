@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import './VerifyOtp.css';
-
-const VerifyOtp = ({ email }) => {
+import { useLocation } from "react-router-dom";
+const VerifyOtp = () => {
+  const location = useLocation();
+  const email = location.state?.email || "";
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [error, setError] = useState("");
   const inputsRef = useRef([]);

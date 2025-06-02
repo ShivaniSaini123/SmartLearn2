@@ -6,19 +6,10 @@ const Details = ({ email: propEmail }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extract email from URL if not provided as a prop
-  const [email, setEmail] = useState(propEmail || "");
+  const editMode = location.state?.editMode || false;
+  const userFromState = location.state?.user || null;
 
-  useEffect(() => {
-    if (!propEmail) {
-      const queryParams = new URLSearchParams(location.search);
-      const emailFromUrl = queryParams.get("email");
-      if (emailFromUrl) {
-        setEmail(emailFromUrl);
-      }
-    }
-  }, [propEmail, location.search]);
-
+  const [email, setEmail] = useState(propEmail || location.state?.email || "");
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -31,69 +22,92 @@ const Details = ({ email: propEmail }) => {
     identifier: "",
   });
 
-  // Handle input changes
+  useEffect(() => {
+    if (editMode && email) {
+      // Fetch profile data if in edit mode
+      const fetchProfile = async () => {
+        try {
+          const res = await fetch(`http://localhost:4000/api/v1/profile/${email}`);
+          if (!res.ok) throw new Error("Failed to fetch profile");
+          const data = await res.json();
+          setFormData({
+            name: data.name || "",
+            password: "", // leave empty for security
+            yearOfStudy: data.yearOfStudy || "",
+            semester: data.semester || "",
+            department: data.department || "",
+            college: data.college || "",
+            phone: data.phone || "",
+            role: data.role || "",
+            identifier: data.identifier || "",
+          });
+        } catch (err) {
+          console.error("Failed to load profile:", err);
+          alert("Failed to load profile data.");
+        }
+      };
+      fetchProfile();
+    }
+  }, [editMode, email]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Store semester for both & yearOfStudy only for Students
-    const userDetails = {
+    const payload = {
       ...formData,
       email,
-      semester: formData.semester || "1", // Ensure semester is stored
-      ...(formData.role === "Student" && { yearOfStudy: formData.yearOfStudy || "1" }) // Include yearOfStudy only for students
+      ...(formData.role === "Student" && { yearOfStudy: formData.yearOfStudy || "1" }),
     };
 
-    console.log("User Details:", userDetails);
-
     try {
-      const response = await fetch("http://localhost:4000/api/v1/welcome", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/v1/${editMode ? `updateprofile/${email}` : "welcome"}`,
+        {
+          method: editMode ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
-        alert("User created successfully!");
+        alert(editMode ? "Profile updated!" : "User created!");
         navigate("/login");
       } else {
         const errorData = await response.json();
-        console.error("Error creating user:", errorData);
-        alert("Error creating user: " + (errorData.message || "Unknown error"));
+        alert("Error: " + (errorData.message || "Something went wrong"));
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Request failed:", error);
       alert("An error occurred: " + error.message);
     }
   };
 
- return (
+  return (
     <div className="container">
-  <div className="formCard">
-    <h2 className="details-heading">Enter Your Details</h2>
-    <form onSubmit={handleSubmit} className="details-form">
-      <div className="details-form-group">
-        <label className="details-label">Name:</label>
-       <input
-  type="text"
-  name="name"
-  value={formData.name}
-  onChange={handleChange}
-  required
-  className="input" // <- updated from "details-input"
-/>
-
-      </div>
-
-      {/* Repeat for all fields with matching classNames */}
-
+      <div className="formCard">
+        <h2 className="details-heading">
+          {editMode ? "Update Your Details" : "Enter Your Details"}
+        </h2>
+        <form onSubmit={handleSubmit} className="details-form">
+          {/* Name input (not editable in editMode?) */}
+          {!editMode && (
+            <div className="formGroup">
+              <label className="label">Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+          )}
 
           <div className="formGroup">
             <label className="label">Password:</label>
@@ -102,7 +116,7 @@ const Details = ({ email: propEmail }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              required
+              required={!editMode}
               className="input"
             />
           </div>
@@ -133,10 +147,9 @@ const Details = ({ email: propEmail }) => {
                 className="select"
               >
                 <option value="">Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                {[1, 2, 3, 4].map((year) => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
               </select>
             </div>
           )}
@@ -152,9 +165,7 @@ const Details = ({ email: propEmail }) => {
             >
               <option value="">Select Semester</option>
               {[...Array(8)].map((_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {i + 1}
-                </option>
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
               ))}
             </select>
           </div>
@@ -190,8 +201,8 @@ const Details = ({ email: propEmail }) => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              required
               pattern="^\d{10}$"
+              required
               className="input"
             />
           </div>
@@ -213,7 +224,7 @@ const Details = ({ email: propEmail }) => {
           </div>
 
           <button type="submit" className="button">
-            Submit
+            {editMode ? "Update" : "Submit"}
           </button>
         </form>
       </div>

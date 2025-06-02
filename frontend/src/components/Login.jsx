@@ -12,47 +12,51 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+    setError("");
+
     try {
       const response = await fetch("http://localhost:4000/api/v1/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
-      const responseData = await response.json();
-      console.log(responseData); // Log the full response object
-      console.log("Before:", responseData?.data?.role); // Log the role inside the 'data' object
-      
-      if (response.ok) {
+
+      const data = await response.json();
+
+      // Redirect to OTP verification if required
+      if (response.status === 403 && data.redirectTo === "/verify-otp") {
+        navigate("/verify-otp", { state: { email: data.email } });
+      } else if (response.ok) {
+        // Successful login
+        const user = data.user;
+
         setEmails(email);
         localStorage.setItem("userEmail", email);
         localStorage.setItem("user", JSON.stringify({
-          id: responseData.data._id,
-          email: responseData.data.email,
-          role: responseData.data.role,
-          college: responseData.data.college,
-          department: responseData.data.department,
-          phone: responseData.data.phone,
-          yearOfStudy: responseData.data.yearOfStudy
+          id: user._id,
+          email: user.email,
+          role: user.role,
+          college: user.college,
+          department: user.department,
+          phone: user.phone,
+          yearOfStudy: user.yearOfStudy,
         }));
-  
-        const role = responseData?.data?.role || "Student"; // Access role from responseData.data
-        console.log("Role is:", role); // Log the resolved role
-  
+
+        const role = user.role || "Student";
+        console.log("Role is:", role);
+
+        // Redirect based on role
         const targetRoute = role === "Professor" ? "/classDashBoard" : "/dashboard";
         navigate(targetRoute);
       } else {
-        setError(responseData.message || "Login failed, please try again");
+        setError(data.message || "Login failed");
       }
-    } catch (error) {
-      setError("An error occurred. Please try again later.");
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
     }
   };
-  
-  
+
   return (
     <div id="login1-container">
       <div id="login1-card">
@@ -66,7 +70,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              placeholder="Enter You Email"
+              placeholder="Enter Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
