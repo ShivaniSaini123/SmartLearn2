@@ -18,6 +18,9 @@ import Exam from './components/Exam'
 
 import ProfilePage from "./components/Profile";
 import VideoMeetComponent from "./components/VideoMeet";
+import MeetingPage from "./components/MeetingPage";  
+// import JoinRoom from "./components/JoinRoom";
+// import VideoChat from "./components/VideoChat";
 import Assignment from "./components/Assignment";
 import ProffAddAssign from './components/ProffAddAssign';
 import GoalForm from './components/Goals';
@@ -128,10 +131,11 @@ function App() {
           path="/profile"
           element={<ProfilePage/>}
         />
-        <Route
-          path="/room"
-          element={<VideoMeetComponent/>}
-        />
+       <Route path="/meet" element={<VideoMeetComponent />} />
+<Route path="/meet/:linkId" element={<MeetingPage />} />
+
+        {/* <Route path="/room" element={<JoinRoom />} />
+        <Route path="/room/:roomId" element={<VideoChat />} /> */}
         
           <Route 
             path="/pomodoro" 

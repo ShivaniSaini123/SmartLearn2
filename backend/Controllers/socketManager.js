@@ -1,111 +1,86 @@
-import { Server } from "socket.io"
-let connections = {}
-let messages = {}
-let timeOnline = {}
-export const connectToSocket = (server) => {
-    const io = new Server(server, {
-        cors: {
-            origin: "*",
-            methods: ["GET", "POST"],
-            allowedHeaders: ["*"],
-            credentials: true
-        }
+const { Server } = require('socket.io');
+
+const connections = {};
+const messages = {};
+const nameMap = {};
+const timeOnline = {};
+
+const connectToSocket = (server) => {
+  const io = new Server(server, {
+    cors: {
+      origin: '*', // You may want to specify your frontend origin here
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['*'],
+      credentials: true,
+    },
+  });
+
+  io.on('connection', (socket) => {
+    console.log(`User connected: ${socket.id}`);
+
+    socket.on('join-call', (roomId, username) => {
+      console.log(`${username} joined room: ${roomId}`);
+      if (!connections[roomId]) connections[roomId] = [];
+      connections[roomId].push(socket.id);
+      nameMap[socket.id] = username || 'Unknown';
+      timeOnline[socket.id] = new Date();
+
+      // Notify all users in the room about the new user
+      // connections[roomId].forEach((clientId) => {
+      //   io.to(clientId).emit('user-joined', socket.id, connections[roomId], nameMap);
+      // });
+     const newUserName = nameMap[socket.id] || 'Someone';
+
+connections[roomId].forEach((clientId) => {
+  io.to(clientId).emit('user-joined', socket.id, connections[roomId], newUserName);
+});
+
+
+      // Send chat history to the newly joined user
+      if (messages[roomId]) {
+        messages[roomId].forEach((msg) => {
+          io.to(socket.id).emit('chat-message', msg.data, msg.sender, msg['socket-id-sender']);
+        });
+      }
     });
-    io.on("connection", (socket) => {
-        console.log("SOMETHING CONNECTED")
-        socket.on("join-call", (path) => {
-            if (connections[path] === undefined) {
-                connections[path] = []
-            }
-            connections[path].push(socket.id)
-            timeOnline[socket.id] = new Date();
 
-            // connections[path].forEach(elem => {
-            //     io.to(elem)
-            // })
+    socket.on('signal', (toId, message) => {
+      console.log(`Signal from ${socket.id} to ${toId}`);
+      io.to(toId).emit('signal', socket.id, message);
+    });
 
-            for (let a = 0; a < connections[path].length; a++) {
-                io.to(connections[path][a]).emit("user-joined", socket.id, connections[path])
-            }
+    socket.on('chat-message', (data, sender) => {
+      const room = Object.keys(connections).find((key) => connections[key].includes(socket.id));
+      if (room) {
+        if (!messages[room]) messages[room] = [];
+        messages[room].push({ sender, data, 'socket-id-sender': socket.id });
 
-            if (messages[path] !== undefined) {
-                for (let a = 0; a < messages[path].length; ++a) {
-                    io.to(socket.id).emit("chat-message", messages[path][a]['data'],
-                        messages[path][a]['sender'], messages[path][a]['socket-id-sender'])
-                }
-            }
+        connections[room].forEach((clientId) => {
+          io.to(clientId).emit('chat-message', data, sender, socket.id);
+        });
+      }
+    });
 
-        })
+    socket.on('disconnect', () => {
+      console.log(`User disconnected: ${socket.id}`);
+      const room = Object.keys(connections).find((key) => connections[key].includes(socket.id));
+      const name = nameMap[socket.id] || 'Someone';
 
-        socket.on("signal", (toId, message) => {
-            io.to(toId).emit("signal", socket.id, message);
-        })
+      if (room) {
+        connections[room] = connections[room].filter((id) => id !== socket.id);
+        connections[room].forEach((clientId) => {
+          io.to(clientId).emit('user-left', socket.id, name);
+        });
 
-        socket.on("chat-message", (data, sender) => {
+        if (connections[room].length === 0) delete connections[room];
+      }
 
-            const [matchingRoom, found] = Object.entries(connections)
-                .reduce(([room, isFound], [roomKey, roomValue]) => {
+      delete nameMap[socket.id];
+      delete timeOnline[socket.id];
+    });
+  });
 
+  return io;
+};
 
-                    if (!isFound && roomValue.includes(socket.id)) {
-                        return [roomKey, true];
-                    }
-
-                    return [room, isFound];
-
-                }, ['', false]);
-
-            if (found === true) {
-                if (messages[matchingRoom] === undefined) {
-                    messages[matchingRoom] = []
-                }
-
-                messages[matchingRoom].push({ 'sender': sender, "data": data, "socket-id-sender": socket.id })
-                console.log("message", matchingRoom, ":", sender, data)
-
-                connections[matchingRoom].forEach((elem) => {
-                    io.to(elem).emit("chat-message", data, sender, socket.id)
-                })
-            }
-
-        })
-
-        socket.on("disconnect", () => {
-
-            var diffTime = Math.abs(timeOnline[socket.id] - new Date())
-
-            var key
-
-            for (const [k, v] of JSON.parse(JSON.stringify(Object.entries(connections)))) {
-
-                for (let a = 0; a < v.length; ++a) {
-                    if (v[a] === socket.id) {
-                        key = k
-
-                        for (let a = 0; a < connections[key].length; ++a) {
-                            io.to(connections[key][a]).emit('user-left', socket.id)
-                        }
-
-                        var index = connections[key].indexOf(socket.id)
-
-                        connections[key].splice(index, 1)
-
-
-                        if (connections[key].length === 0) {
-                            delete connections[key]
-                        }
-                    }
-                }
-
-            }
-
-
-        })
-
-
-    })
-
-
-    return io;
-}
-
+module.exports = { connectToSocket };

@@ -6,3 +6,5 @@ const server = IS_PROD ?
 
 
 export default server;
+// const server = 'http://localhost:4000'; // or your deployed backend URL
+// export default server;

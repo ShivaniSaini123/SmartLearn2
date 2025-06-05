@@ -66,50 +66,67 @@ function AddSyllabus() {
   
   return (
     <>
-      <style>
-  {`
-    .syllabus-form {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      background: rgb(245, 241, 241);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      font-family: Arial, sans-serif;
-      color: black; /* Ensures form text is black */
-    }
+  <style>
+{`
+  .syllabus-form {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 25px;
+    background: linear-gradient(135deg, #1a1a2e, #2a0845);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+  }
 
-    .syllabus-form input,
-    .syllabus-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      color: black; /* Input and textarea text color */
-    }
+  .syllabus-form input,
+  .syllabus-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-size: 15px;
+    background-color: #111;
+    color: white;
+  }
 
-    .syllabus-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+  .syllabus-form input::placeholder,
+  .syllabus-form textarea::placeholder {
+    color: #aaa;
+  }
 
-    .syllabus-form button:hover {
-      background-color: #0056b3;
-    }
-  `}
+  .syllabus-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #7928ca, #4facfe);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .syllabus-form button:hover {
+    opacity: 0.9;
+  }
+`}
 </style>
 
 
+
       <form className="syllabus-form" onSubmit={handleSubmit}>
-      <h2 style={{ textAlign: 'center', color: 'black' }}>Add Syllabus</h2>
+      <h2 style={{
+  textAlign: 'center',
+  background: 'linear-gradient(to right, #7928ca, #4facfe)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  fontWeight: 'bold',
+  fontSize: '26px'
+}}>Add Syllabus</h2>
+
 
 
         <input

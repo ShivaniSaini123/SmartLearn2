@@ -1,0 +1,72 @@
+/* VideoMeet.css */
+
+.video-meet-container {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  background-color: #1e0b32; /* Deep dark purple */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+  color: #e0e0ff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Primary Buttons */
+.toggle-button,
+.action-button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #8a2be2, #3b82f6); /* Purple to Blue */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.toggle-button:hover,
+.action-button:hover {
+  opacity: 0.9;
+}
+
+/* Inputs */
+.input-field {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+  background-color: #2b213a;
+  border: 1px solid #444;
+  color: #f3f3f3;
+  border-radius: 6px;
+}
+
+/* Meeting Link Display */
+.meeting-link-container {
+  margin-top: 15px;
+  word-break: break-word;
+  color: #c5a3ff;
+}
+
+/* Copy Button */
+.copy-button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #7d6ff0;
+}
+
+/* Optional status message */
+.message {
+  margin-top: 20px;
+  color: #e6ccff;
+  text-align: center;
+}

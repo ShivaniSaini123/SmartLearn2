@@ -21,7 +21,10 @@ const {addSyllabus}=require('../Controllers/addSyllabus');
 const syllabusController = require('../Controllers/syllabusController');
 const goalController = require('../Controllers/Goals');
 const updateUserProfile = require('../Controllers/updateUserProfile');
-
+const { createMeeting, verifyMeeting } =require('../Controllers/meetingController');
+// user.js
+router.post('/meeting/create', createMeeting);
+router.post('/meeting/verify', verifyMeeting);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -58,4 +61,18 @@ router.post('/goals', goalController.createGoal);
 router.get('/goals/:userId', goalController.getGoalsByUser);
 router.put('/goals/:id', goalController.updateGoal);
 router.delete('/goals/:id', goalController.deleteGoal);
+// Example Express route handler
+router.get("/api/v1/meeting/:linkId", async (req, res) => {
+  const { linkId } = req.params;
+  try {
+    const meeting = await Meeting.findOne({ linkId });
+    if (!meeting) {
+      return res.status(404).json({ message: "Meeting not found" });
+    }
+    res.json({ meeting });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

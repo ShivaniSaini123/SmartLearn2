@@ -5,9 +5,29 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 //const timetableRoutes = require('./routes/timetable');
 require("dotenv").config();
-
-
+const http = require("http");
+const { Server } = require("socket.io");
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // frontend origin
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+io.on("connection", (socket) => {
+  console.log("A user connected:", socket.id);
+socket.on("join-room", (roomId) => {
+    socket.join(roomId);
+    console.log(`User ${socket.id} joined room ${roomId}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
 const PORT = process.env.PORT || 4000;
 app.use('/uploads', express.static('uploads'));
 // Import routes and database
@@ -118,7 +138,10 @@ app.use((req, res, next) => {
 });
 
 // Mount user routes
-app.use("/api/v1", user);
+app.use('/api/v1', user);
+
+// const meetingRoutes = require('./routes/user');
+// app.use('/api/v1',meetingRoutes);
 const syllabusRoutes = require('./routes/user');
 app.use('/api', syllabusRoutes); 
 const attendanceRoutes = require('./routes/user');
@@ -136,7 +159,11 @@ app.get('/api/v1/goals/:userId', (req, res) => {
 });
 
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`App is listening at ${PORT}`);
+// // Start the server
+// app.listen(PORT, () => {
+//   console.log(`App is listening at ${PORT}`);
+// });
+// Start the HTTP + Socket.IO server
+server.listen(PORT, () => {
+  console.log(`App + Socket.IO server is listening at http://localhost:${PORT}`);
 });
