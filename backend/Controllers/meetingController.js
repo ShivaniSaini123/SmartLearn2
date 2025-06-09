@@ -18,32 +18,6 @@ const createMeeting = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-
-
-// const verifyMeeting = async (req, res) => {
-//   let { linkId, otp } = req.body;
-
-//   // Strip '/meet/' prefix if present
-// //   if (linkId.startsWith("/meet/")) {
-// //     linkId = linkId.split("/meet/")[1]; // get only the UUID part
-// //   }
-
-//   try {
-//     const meeting = await Meeting.findOne({ linkId });
-
-//     if (!meeting) {
-//       return res.status(404).json({ success: false, message: "Meeting not found or expired" });
-//     }
-
-//     if (meeting.otp !== otp) {
-//       return res.status(401).json({ success: false, message: "Invalid OTP" });
-//     }
-
-//     res.status(200).json({ success: true, message: "OTP verified" });
-//   } catch (err) {
-//     res.status(500).json({ success: false, message: err.message });
-//   }
-// };
 const verifyMeeting = async (req, res) => {
   const { linkId, otp } = req.body;
 

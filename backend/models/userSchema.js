@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-
-
 const userSchema = new mongoose.Schema({
   // name: {
   //   type: String,
@@ -47,7 +45,10 @@ const userSchema = new mongoose.Schema({
   isVerified: {
     type: Boolean,
     default: false,
-  }
+  },
+   contacts: [{ type: String }],  // array of emails or user IDs
+  connectionRequests: [{ type: String }],  // emails of users who sent request
+  
 });
 
 module.exports = mongoose.model("User", userSchema);

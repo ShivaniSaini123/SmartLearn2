@@ -30,7 +30,7 @@ const ProffDashBoard = () => {
       setOtp(newOtp.toString());
   
       try {
-        const res = await fetch("http://localhost:4000/api/attendance", {
+        const res = await fetch("http://localhost:4000/api/v1/attendance", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ branch, subject, semester, otp: newOtp }),

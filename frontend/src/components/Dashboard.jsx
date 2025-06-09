@@ -61,7 +61,9 @@ console.log("Branch:", userdata.branch);
         <div className="navbar-title">Dashboard</div>
         <div className="button-container">
           <button onClick={() => setIsModalOpen(true)}>Search</button>
-          <button onClick={() => navigate('/Profile')}>Profile</button>
+          <button onClick={() => navigate(`/profile/${encodeURIComponent(email)}`)
+
+}>Profile</button>
         </div>
         {/* <img src={user} alt="User" className="user-logo" /> */}
       </nav>
@@ -76,7 +78,7 @@ console.log("Branch:", userdata.branch);
         <button onClick={() => navigate('/pomodoro')}>Pomodoro</button>
         <button onClick={() => navigate('/goals')}>Set Goals</button>
         <button onClick={() => navigate('/meet')}>Join Room</button>
-        <button onClick={() => navigate('/')}>Friends</button>
+        <button onClick={() => navigate('/chat')}>Friends</button>
         <button onClick={() => navigate('/studymaterials')}>Study Materials</button>
       </div>
       {/* Search Modal */}

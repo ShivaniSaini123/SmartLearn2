@@ -36,7 +36,7 @@ function AddSyllabus() {
     };
   
     try {
-      const response = await fetch('http://localhost:4000/api/syllabus', {
+      const response = await fetch('http://localhost:4000/api/v1/syllabus', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

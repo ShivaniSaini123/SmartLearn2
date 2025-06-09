@@ -1,19 +1,26 @@
 import { useEffect, useState, useContext } from "react";
 import { EmailContext } from "../contexts/EmailContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // ← import useParams
 import "./Profile.css";
 
 export default function ProfilePage() {
-  const { email } = useContext(EmailContext);
+  const { email: contextEmail } = useContext(EmailContext);
+  const { email: paramEmail } = useParams(); // ← get email from URL
+  const navigate = useNavigate();
+
+  const finalEmail = decodeURIComponent(paramEmail || contextEmail);
+  const isOwnProfile = finalEmail === contextEmail;
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/profile/${email}`);
+        console.log("Fetching profile for:", finalEmail);
+
+        const response = await fetch(`http://localhost:4000/api/v1/profile/${finalEmail}`);
         if (!response.ok) throw new Error("User not found");
         const data = await response.json();
         setUser(data);
@@ -24,18 +31,15 @@ export default function ProfilePage() {
       }
     };
 
-    if (email) {
-      fetchUserProfile();
-    } else {
+    if (finalEmail) fetchUserProfile();
+    else {
       setLoading(false);
-      setError("Email not provided in context");
+      setError("Email not provided");
     }
-  }, [email]);
+  }, [finalEmail]);
 
   const handleEdit = () => {
-   // navigate to Details with email in state
-navigate("/details", { state: { email: user.email } });
-
+    navigate("/details", { state: { email: user.email } });
   };
 
   if (loading) return <p className="loading">Loading...</p>;
@@ -52,7 +56,9 @@ navigate("/details", { state: { email: user.email } });
         <p><strong>College:</strong> {user.college || "-"}</p>
         <p><strong>Phone:</strong> {user.phone || "-"}</p>
 
-        <button className="edit-btn" onClick={handleEdit}>Edit</button>
+        {isOwnProfile && (
+          <button className="edit-btn" onClick={handleEdit}>Edit</button>
+        )}
       </div>
     </div>
   );

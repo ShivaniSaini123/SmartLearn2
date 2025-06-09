@@ -17,7 +17,7 @@ const AttendanceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/mark', {
+      const res = await axios.post('http://localhost:4000/api/v1/mark', {
         ...formData,
         email,
       }, { withCredentials: true });
@@ -32,7 +32,7 @@ const AttendanceForm = () => {
   const handleViewAttendance = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/view-attendance', {
+      const res = await axios.post('http://localhost:4000/api/v1/view-attendance', {
         email,
         ...viewData,
       });

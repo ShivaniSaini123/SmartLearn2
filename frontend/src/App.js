@@ -28,6 +28,7 @@ import GoalForm from './components/Goals';
 import AddSyllabus from "./components/AddSyllabus";
 import StudyMaterials from "./components/StudyMaterials";
 import AttendanceForm from "./components/AttendanceForm";
+import ChatApp from "./components/ChatApp"; 
 const pageTransition = {
   initial: { opacity: 0, x: 200, scale: 0.95 },
   animate: { opacity: 1, x: 0, scale: 1 },
@@ -127,9 +128,14 @@ function App() {
               </motion.div>
             }
           />
-          <Route
+          {/* <Route
           path="/profile"
           element={<ProfilePage/>}
+        /> */}
+        <Route path="/profile/:email" element={<ProfilePage />} />
+        <Route
+          path="/chat"
+          element={<ChatApp/>}
         />
        <Route path="/meet" element={<VideoMeetComponent />} />
 <Route path="/meet/:linkId" element={<MeetingPage />} />

@@ -24,11 +24,6 @@ const connectToSocket = (server) => {
       connections[roomId].push(socket.id);
       nameMap[socket.id] = username || 'Unknown';
       timeOnline[socket.id] = new Date();
-
-      // Notify all users in the room about the new user
-      // connections[roomId].forEach((clientId) => {
-      //   io.to(clientId).emit('user-joined', socket.id, connections[roomId], nameMap);
-      // });
      const newUserName = nameMap[socket.id] || 'Someone';
 
 connections[roomId].forEach((clientId) => {
