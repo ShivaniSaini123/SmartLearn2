@@ -496,41 +496,44 @@ useEffect(() => {
             </div>
 
             <div className="notification-container">
-              <button
-                className="notification-button"
-                onClick={() => setShowRequests((prev) => !prev)}
-              >
-                🔔
-                {connectionRequests.length > 0 && (
-                  <span className="notification-badge">
-                    {connectionRequests.length}
-                  </span>
-                )}
-              </button>
+  <button
+    className="notification-button"
+    onClick={() => setShowRequests((prev) => !prev)}
+  >
+    🔔
+    {connectionRequests.length > 0 && (
+      <span className="notification-badge">
+        {connectionRequests.length}
+      </span>
+    )}
+  </button>
 
-              {showRequests && (
-                <div className="notification-dropdown">
-                  <h4>Connection Requests</h4>
-                  {connectionRequests.length === 0 ? (
-                    <p>No pending requests</p>
-                  ) : (
-                    <ul className="request-list">
-                      {connectionRequests.map((reqEmail, index) => (
-                        <li key={index}>
-                          {reqEmail}
-                          <button onClick={() => handleAcceptRequest(reqEmail)}>
-                            Accept
-                          </button>
-                          <button onClick={() => handleRejectRequest(reqEmail)}>
-                            Reject
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              )}
-            </div>
+  {showRequests && (
+    <div className="notification-dropdown">
+      <h4>Connection Requests</h4>
+      {connectionRequests.length === 0 ? (
+        <p>No pending requests</p>
+      ) : (
+        <ul className="request-list">
+          {connectionRequests.map((reqEmail, index) => (
+            <li key={index}>
+              <span>{reqEmail}</span>
+             <div className="request-actions">
+              <button onClick={() => handleAcceptRequest(reqEmail)}>
+                Accept
+              </button>
+              <button onClick={() => handleRejectRequest(reqEmail)}>
+                Reject
+              </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )}
+</div>
+
           </div>
 
           <h3>Users</h3>
