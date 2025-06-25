@@ -1,124 +1,130 @@
-/* timetableEnhancement.css */
+/* Timetable.css */
 
-/* Global page background matching Aura theme */
-#timetable-container27 {
-  padding: 15px 8px;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  background: linear-gradient(to right, #1f0036, #0d0221);
+#loading-text27,
+#no-timetable-text27 {
+  text-align: center;
+  font-size: 1rem;
   color: #f0f0f0;
-  min-height: 100vh;
-  display: block;
+  margin-top: 1.5rem;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Glass-morphism wrapper for the grid */
-#timetable-grid27 {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* Container */
+.timetable-container {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  padding: 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  max-width: 1200px;
-  margin: 0 auto;
+  box-shadow: 0 6px 24px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: "Poppins", sans-serif;
+  color: #f0f0f0;
 }
 
-/* Header with neon accent */
+/* Header */
 #timetable-header27 {
   text-align: center;
-  font-size: 2rem;
-  margin: 24px 0;
-  font-weight: 700;
-  background: linear-gradient(90deg, #00dbde, #fc00ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Day Tiles using frosted panel style */
+/* Grid Layout */
+.timetable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+/* Each Day Tile */
 .day-tile {
-  background: rgba(44, 44, 63, 0.6);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  padding: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 14px 12px;
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
 }
+
 .day-tile:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-/* Day Header neon border */
-.day-header {
-  font-size: 1.4rem;
+/* Day Header */
+.day-tile h3 {
+  font-size: 16px;
   margin-bottom: 12px;
-  font-weight: bold;
-  color: #f0f0f0;
-  position: relative;
-}
-.day-header::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 10%;
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(to right, #00dbde, #fc00ff);
+  color: #e0e0e0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #38f9d7;
+  padding-bottom: 4px;
 }
 
-/* Class Info panels */
+/* Class info block */
 .class-info {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 8px;
-  border-radius: 8px;
-  border-left: 4px solid #00dbde;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s, box-shadow 0.3s;
+  background: rgba(56, 249, 215, 0.13);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 6px rgba(56, 249, 215, 0.3);
 }
-.class-info:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+
 .class-info h4 {
-  font-size: 1rem;
-  color: #fc00ff;
-  margin-bottom: 4px;
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-/* Time & Venue styling */
-.class-time-venue {
-  background: rgba(30, 30, 47, 0.6);
-  border: 1px dashed #fc00ff;
-  padding: 4px 6px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: #f0f0f0;
-  transition: border-color 0.3s, background 0.3s;
-}
-.class-time-venue:hover {
-  background: rgba(44, 44, 63, 0.8);
-  border-color: #00dbde;
+.class-info p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #d0f0f8;
 }
 
-/* No classes and loading messages */
-.no-classes, .loading-text, .no-timetable-text {
+/* No classes text */
+#no-classes-monday27,
+#no-classes-tuesday27,
+#no-classes-wednesday27,
+#no-classes-thursday27,
+#no-classes-friday27,
+#no-classes-saturday27,
+#no-classes-sunday27 {
+  font-style: italic;
+  color: #aaa;
   text-align: center;
-  font-size: 1rem;
-  color: #ff6b6b;
-  margin-top: 16px;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  #timetable-header27 { font-size: 1.6rem; margin: 16px 0; }
-  .day-header { font-size: 1.2rem; }
-  .class-info h4 { font-size: 0.9rem; }
-  .class-time-venue { font-size: 0.75rem; }
+/* Responsive tweaks */
+@media (max-width: 500px) {
+  .timetable-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .day-tile h3 {
+    font-size: 14px;
+  }
+
+  .class-info h4 {
+    font-size: 12px;
+  }
+
+  .class-info p {
+    font-size: 11px;
+  }
 }

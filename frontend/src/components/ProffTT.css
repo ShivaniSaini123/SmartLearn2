@@ -3,11 +3,13 @@
 .timetable-page {
   background: linear-gradient(120deg, #1c0036, #0d0221);
   min-height: 100vh;
+  height: 100vh; /* Ensure it fills the viewport */
   padding: 20px;
   color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto; /* Make it scrollable */
 }
 
 .timetable-container {

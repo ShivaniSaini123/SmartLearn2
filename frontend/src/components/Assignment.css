@@ -1,131 +1,137 @@
-/* Branch Section Styles */
-.branch-section {
-  background: linear-gradient(135deg, #a900ff, #3b0b84);
+/* Container */
+.assignments-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: "Segoe UI", sans-serif;
   color: white;
-  padding: 22px;
-  margin: 18px 0;
-  border-radius: 18px;
-  cursor: pointer;
+}
+
+/* Page Title */
+.title {
   text-align: center;
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
-  box-shadow: 0 10px 24px rgba(170, 0, 255, 0.45);
-  backdrop-filter: blur(6px);
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #ffccff;
+}
+
+/* Scrollable Content */
+.scrollable-content {
+  max-height: 78vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #aa00ff transparent;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: #aa00ff;
+  border-radius: 6px;
+}
+
+/* Branch Section */
+.branch-section {
+  background: linear-gradient(135deg, #7a00cc, #2e0055);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 24px rgba(170, 0, 255, 0.3);
+  transition: transform 0.3s ease;
 }
 
 .branch-section:hover {
-  background: linear-gradient(135deg, #4a0099, #220045);
-  transform: translateY(-6px) scale(1.05);
-  filter: brightness(1.2);
-  box-shadow: 0 14px 34px rgba(255, 0, 255, 0.55);
+  transform: translateY(-4px);
 }
 
-/* Back Button Styles */
-.back-button {
-  display: inline-block;
-  margin: 30px auto;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, #ff0077, #ff00cc);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
+/* Branch Title */
+.branch-title {
+  font-size: 24px;
   font-weight: 700;
-  border-radius: 14px;
-  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+/* Submit Assignment Button */
+.submit-btn {
+  background: linear-gradient(135deg, #ff0077, #cc00cc);
+  border: none;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
   box-shadow: 0 6px 18px rgba(255, 0, 170, 0.4);
 }
 
-.back-button:hover {
-  background: linear-gradient(135deg, #cc0070, #aa00aa);
-  transform: scale(1.08);
-  box-shadow: 0 10px 30px rgba(255, 0, 170, 0.6);
+.submit-btn:hover {
+  background: linear-gradient(135deg, #aa0066, #9900aa);
+  transform: scale(1.05);
 }
 
-/* Assignment Form Styles */
-.assignment-form {
-  background: rgba(30, 0, 60, 0.6);
-  backdrop-filter: blur(16px);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 12px 35px rgba(255, 0, 255, 0.25);
-  max-width: 720px;
-  margin: 40px auto;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  animation: fadeInUp 0.8s ease both;
-  color: white;
+/* Assignments List */
+.assignments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Inputs */
-.assignment-form input,
-.assignment-form textarea {
-  display: block;
-  width: 100%;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 17px;
-  background: rgba(255, 255, 255, 0.06);
-  color: white;
-  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+/* Individual Assignment Card */
+.assignment-card {
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 20px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border-left: 5px solid #ff00ff;
+  transition: background 0.3s ease;
 }
 
-.assignment-form input:focus,
-.assignment-form textarea:focus {
-  border-color: #d000ff;
-  outline: none;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 14px rgba(255, 0, 255, 0.5);
+.assignment-card:hover {
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Submit Button */
-.assignment-form button {
-  background: linear-gradient(135deg, #00f0ff, #ff00ff);
-  color: #fff;
-  padding: 16px 32px;
-  border: none;
-  cursor: pointer;
-  font-size: 19px;
-  font-weight: bold;
-  border-radius: 14px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 22px rgba(0, 255, 255, 0.4);
+/* Attachments List */
+.attachments-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin-top: 10px;
 }
 
-.assignment-form button:hover {
-  transform: scale(1.07);
-  box-shadow: 0 14px 30px rgba(0, 255, 255, 0.65);
+.attachments-list a {
+  color: #66fffc;
+  text-decoration: underline;
 }
 
-/* Fade In Animation */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.no-assignments {
+  text-align: center;
+  font-size: 18px;
+  color: #ccc;
+  margin-top: 40px;
 }
 
-/* Responsive Layout */
-@media screen and (max-width: 768px) {
-  .assignment-form {
-    padding: 30px 20px;
-    margin: 25px 16px;
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
   }
 
-  .back-button {
-    padding: 14px 24px;
-    font-size: 16px;
+  .submit-btn {
+    padding: 10px 18px;
+    font-size: 15px;
   }
 
-  .branch-section {
-    font-size: 18px;
-    padding: 18px;
+  .branch-title {
+    font-size: 20px;
+  }
+
+  .assignment-card {
+    font-size: 15px;
   }
 }
