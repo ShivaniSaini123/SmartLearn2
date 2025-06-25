@@ -1,48 +1,28 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
-import './Navbar.css';
+import "./Navbar.css";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const LoginHandler = () => navigate('/login');
-  const RegisterHandler = () => navigate('/register');
-
-   
+  const handleLogin = () => navigate("/login");
+  const handleRegister = () => navigate("/register");
+  const handleHome = () => navigate("/");
 
   return (
-    <nav id="navbar-container">
-      <div id="navbar-content">
-        <div id="navbar-logo" onClick={() => navigate('/')}>
-          SmartLearn
-        </div>
-       
-
-        {/* Desktop Menu */}
-        <div id="navbar-buttons" className="hidden md:flex">
-          <button
-            id="login-button"
-            onClick={LoginHandler}
-            className="navbar-button"
-          >
-            Login
-          </button>
-          <button
-            id="register-button2"
-            onClick={RegisterHandler}
-            className="navbar-button"
-          >
-            Register
-          </button>
-        </div>
-
-        
+    <nav className="navbar">
+      <div className="logo" onClick={handleHome} role="button" aria-label="Homepage">
+        SmartLearn
       </div>
 
-     
+      <div className="nav-links">
+        <button className="nav-btn" onClick={handleLogin}>
+          Login
+        </button>
+        <button className="nav-btn primary" onClick={handleRegister}>
+          Register
+        </button>
+      </div>
     </nav>
   );
 };

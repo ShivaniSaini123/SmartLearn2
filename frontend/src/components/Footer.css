@@ -1,141 +1,114 @@
-/* Footer Styles */
-#footer {
-    background: linear-gradient(135deg, #1e1e2e, #282a36);
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    position: absolute;
-    width: 100%;
-    max-height: 120px;
-  }
-  
-  .container {
-    /* max-width: 1050px; */
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 2px;
-  }
-  
-  /* Social Icons */
-  .social-icons {
-    display: flex;
-    gap: 15px;
-    /* margin-bottom: 20px; */
-  }
-  
-  .social-icons a {
-    color: #ffffff;
-    font-size: 24px;
-    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-  }
-  
-  .social-icons a:hover {
-    color: #ff4757;
-    transform: scale(1.2) rotate(5deg);
-  }
-  
-  /* Footer Links */
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* gap: 20px; */
-    /* margin-bottom: 15px; */
-  }
-  
-  .footer-links a,
-  .footer-links button {
-    background: none;
-    border: none;
-    color: #ddd;
-    font-size: 16px;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .footer-links a:hover,
-  .footer-links button:hover {
-    color: #ffcc00;
-  }
-  
-  /* Copyright */
-  .copyright {
-    font-size: 14px;
-    opacity: 0.7;
-    /* margin-top: 10px; */
-  }
-  
-  Modal Overlay
-  #modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* height: 100%; */
-    background: rgba(0, 0, 0, 0.6);
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out;
-  }
-  
-  /* Modal Content */
-  #footer-modal {
-    background: #2b2e3b;
-    /* padding: 25px;
-    border-radius: 10px; */
-    text-align: center;
-    max-width: 450px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  /* Close Button */
-  .close-btn {
-    padding: 10px 15px;
-    background: #ff4757;
-    border: none;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .close-btn:hover {
-    background: #e84142;
-  }
-  
-  /* Fade In Animation */
-  @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .footer-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-  
-    .social-icons {
-        gap: 10px;
-    }
-  
-    #footer-modal {
-        width: 95%;
-    }
-  }
-  
+.footer {
+  background: #1c1c2a;
+  color: #ffffff;
+  padding: 40px 10%;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Social Media Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  color: #ccccff;
+  font-size: 24px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #6c63ff;
+  transform: scale(1.1);
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links a,
+.footer-links button {
+  color: #ccccff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover,
+.footer-links button:hover {
+  color: #ffffff;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.footer-modal {
+  background: #2a2a3c;
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.footer-modal h2 {
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+  color: #6c63ff;
+}
+
+.footer-modal p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: #ddddff;
+}
+
+.close-btn {
+  background-color: #6c63ff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #584bd4;
+}
+
+/* Copyright */
+.footer .copyright {
+  font-size: 0.9rem;
+  color: #9999cc;
+}

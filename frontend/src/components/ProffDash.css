@@ -67,107 +67,38 @@
     color: #333;
   }
   
-/* Glassmorphic Modal Overlay */
+/* Enhance Modal Overlay with subtle animated gradient */
+/* Modal Overlay */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: rgba(10, 0, 20, 0.85);
+    background: linear-gradient(135deg, rgba(10,0,20,0.85), rgba(60,0,90,0.9));
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    backdrop-filter: blur(6px);
 }
 
-/* Neon Glass Modal */
+/* Modal Content */
 .modal-content {
-    background: rgba(255, 255, 255, 0.1);
-    /* backdrop-filter: blur(20px); */
-    padding: 25px;
-    border-radius: 12px;
+    background: rgba(30, 0, 40, 0.55);
+    backdrop-filter: blur(20px);
+    padding: 28px 32px;
+    border-radius: 14px;
     width: 400px;
-    box-shadow: 0px 0px 25px rgba(255, 0, 255, 0.3);
-    animation: fadeIn 0.3s ease-in-out;
+    max-width: 90vw;
+    box-shadow: 0 0 20px rgba(204, 0, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: fadeInScale 0.35s ease forwards;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ddd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Modal Title */
-.modal-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: white;
-    text-shadow: 2px 2px 15px rgba(255, 0, 255, 0.6);
-}
-
-/* Form Inputs */
-.modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.modal-input {
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-.modal-input:focus {
-    outline: none;
-    border: 2px solid #ff00ff;
-    box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.7);
-}
-
-/* Modal Buttons */
-.modal-btn {
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.generate {
-    background: linear-gradient(120deg, #8a2be2, #5d00ff);
-}
-
-.generate:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 20px #5d00ff;
-}
-
-.close {
-    background: linear-gradient(120deg, #ff0044, #d1003a);
-}
-
-.close:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 20px #d1003a;
-}
-
-/* Background Animation */
-@keyframes backgroundAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Fade-in Animation */
-@keyframes fadeIn {
+/* Smooth fade & scale animation */
+@keyframes fadeInScale {
     from {
         opacity: 0;
         transform: scale(0.9);
@@ -175,5 +106,108 @@
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+/* Modal Title */
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: #d8a0f7;
+    text-shadow:
+        0 0 5px rgba(216, 160, 247, 0.6);
+    letter-spacing: 1px;
+}
+
+/* Inputs */
+.modal-input {
+    padding: 12px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: #eee;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.12);
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.modal-input::placeholder {
+    color: #cdb4ffcc;
+}
+
+.modal-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 8px rgba(216, 160, 247, 0.5);
+}
+
+/* Modal Buttons */
+.modal-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    margin-top: 10px;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 8px transparent;
+    cursor: pointer;
+    margin: 12px 8px 0 8px;
+}
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* increased gap for better spacing */
+}
+
+
+.generate {
+    background: linear-gradient(120deg, #a078d4, #7e5dbf);
+    color: #f3e9ff;
+    box-shadow: 0 0 10px #a078d4aa;
+}
+
+.generate:hover, .generate:focus {
+    transform: scale(1.04);
+    box-shadow: 0 0 15px #8b62c9cc;
+}
+
+.close {
+    background: linear-gradient(120deg, #e5646a, #b0454f);
+    color: #fce7e7;
+    box-shadow: 0 0 10px #e5646aaa;
+}
+
+.close:hover, .close:focus {
+    transform: scale(1.04);
+    box-shadow: 0 0 15px #b84b50cc;
+}
+
+/* OTP container */
+.otp-container {
+    margin-top: 18px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #bf91d9;
+    text-shadow: 0 0 4px rgba(191, 145, 217, 0.6);
+}
+
+/* Message container */
+.message-container {
+    margin-top: 12px;
+    font-size: 1.1rem;
+    color: #bda0d9cc;
+    text-shadow: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* FadeIn reused */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

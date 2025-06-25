@@ -10,28 +10,20 @@ const Footer = () => {
   };
 
   return (
-    <footer id="footer">
-      <div className="container">
+    <footer className="footer">
+      <div className="footer-container">
         {/* Social Icons */}
-        <div id="social-icons" className="social-icons">
-          <a href="/" aria-label="Instagram">
-            <Instagram />
-          </a>
-          <a href="https://x.com/" aria-label="Twitter">
-            <Twitter />
-          </a>
-          <a href="/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <Linkedin />
-          </a>
-          <a href="/" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-            <Github />
-          </a>
+        <div className="social-icons">
+          <a href="/" aria-label="Instagram"><Instagram /></a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter /></a>
+          <a href="/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin /></a>
+          <a href="/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github /></a>
         </div>
 
         {/* Footer Links */}
         <div className="footer-links">
           <button onClick={toggleModal}>About Us</button>
-          <a href="/" target="_blank" rel="noopener noreferrer">Contact</a>
+          <a href="/">Contact</a>
           <a href="/">Terms & Conditions</a>
         </div>
 
@@ -43,15 +35,15 @@ const Footer = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div id="modal-overlay" onClick={toggleModal}>
-          <div id="footer-modal" onClick={(e) => e.stopPropagation()}>
-            <h2 className="modal-header">Welcome to SmartLearn</h2>
-            <p className="modal-content">
-            SmartLearn is your ultimate academic companion, designed to streamline your college journey.
-Track your academic performance, manage tasks effortlessly, and unlock achievements through an engaging reward system.
-Stay organized, set goals, and showcase your progress—all in one smart platform
+        <div className="modal-overlay" onClick={toggleModal}>
+          <div className="footer-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Welcome to SmartLearn</h2>
+            <p>
+              SmartLearn is your ultimate academic companion, designed to streamline your college journey.
+              Track your academic performance, manage tasks effortlessly, and unlock achievements through an engaging reward system.
+              Stay organized, set goals, and showcase your progress—all in one smart platform.
             </p>
-            <button onClick={toggleModal} className="close-btn">Close</button>
+            <button className="close-btn" onClick={toggleModal}>Close</button>
           </div>
         </div>
       )}

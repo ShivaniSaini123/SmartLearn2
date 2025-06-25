@@ -64,9 +64,6 @@ const ProffDashBoard = () => {
         <button onClick={() => handleNavigation("/ProffExam")} className="dashboard-btn">
           <i className="fas fa-pencil-alt"></i> Add Exam Schedule
         </button>
-        <button onClick={() => handleNavigation("/ProffAddProjects")} className="dashboard-btn">
-          <i className="fas fa-tasks"></i> Assign Project
-        </button>
         <button onClick={handleMarkAttendance} className="dashboard-btn">
           <i className="fas fa-user-check"></i> Mark Attendance
         </button>

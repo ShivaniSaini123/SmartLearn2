@@ -1,118 +1,169 @@
-/* AddAssignmentEnhancement.css */
-
-/* Page background & natural flow */
 .assignment-page {
-  background: linear-gradient(to right, #1f0036, #0d0221);
-  padding: 10px 5px; /* Further reduced page padding */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #341335, #070108);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #eee;
 }
 
-/* Center container horizontally, ultra-compact height */
+/* Smaller container size */
 .assignment-container {
-  margin: 0 auto;
-  max-width: 350px;
-  padding: 10px 15px;       /* Minimized vertical padding */
-  border-radius: 12px;
-
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
-  color: #f0f0f0;
-}
-
-/* Form heading */
-.assignment-container h2 {
+  background: rgba(40, 10, 60, 0.85);
+  padding: 25px 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(150, 50, 150, 0.6);
+  width: 320px;        /* smaller width */
+  max-height: 600px;   /* fixed max height */
+  overflow: hidden;    /* hide overflow outside container */
   text-align: center;
-  font-size: 1rem;             /* Slim heading size */
-  margin-bottom: 0.5rem;       /* Minimized space below heading */
+  backdrop-filter: blur(10px);
+  color: #f3e9ff;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Form layout */
+/* Title styling */
+.assignment-container h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-shadow: 0 0 6px #c88cf5aa;
+}
+
+/* Make form scrollable inside container */
 .assignment-form {
   display: flex;
   flex-direction: column;
-  gap: 5px;                    /* Tightest gap */
+  gap: 16px;
+  text-align: left;
+  overflow-y: auto;       /* vertical scroll if needed */
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: #a078d4 transparent;
+  max-height: 100%;       /* fill container height */
+  padding-right: 6px;     /* space for scrollbar */
 }
 
-/* Inputs, selects, textarea */
-.assignment-form input,
-.assignment-form textarea,
-.assignment-form select {
-  padding: 4px 6px;            /* Slim padding */
-  font-size: 0.85rem;          /* Smaller text */
-  border: 1px solid #444;
-  border-radius: 6px;
-  background: #2c2c3f;
-  color: #f0f0f0;
-  transition: border-color 0.3s;
+/* Custom scrollbar for WebKit browsers */
+.assignment-form::-webkit-scrollbar {
+  width: 6px;
+}
+.assignment-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+.assignment-form::-webkit-scrollbar-thumb {
+  background-color: #a078d4;
+  border-radius: 10px;
 }
 
+/* Label styling */
+.assignment-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #d1a6ff;
+  text-shadow: 0 0 4px #b589d9bb;
+}
+
+/* Inputs and select styling */
+.assignment-form input[type="text"],
+.assignment-form input[type="datetime-local"],
+.assignment-form select,
 .assignment-form textarea {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #eee;
+  box-shadow: inset 0 0 7px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.assignment-form input::placeholder,
+.assignment-form textarea::placeholder {
+  color: #cdb4ffcc;
 }
 
 .assignment-form input:focus,
-.assignment-form textarea:focus,
-.assignment-form select:focus {
+.assignment-form select:focus,
+.assignment-form textarea:focus {
   outline: none;
-  border-color: #38f9d7;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px #c491f5cc;
 }
 
-/* File-upload wrapper */
+/* Textarea min height */
+.assignment-form textarea {
+  min-height: 80px;
+}
+
+/* File input wrapper */
 .file-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-.file-wrapper input[type="file"] {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .file-label {
-  display: block;
-  padding: 4px 6px;            /* Slim label padding */
-  border: 1px dashed #666;
-  border-radius: 6px;
-  text-align: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #d1a6ff;
+  text-shadow: 0 0 4px #b589d9bb;
+}
+
+.assignment-form input[type="file"] {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  background: #2c2c3f;
-  font-size: 0.85rem;
+  color: #eee;
+  box-shadow: inset 0 0 7px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.assignment-form input[type="file"]:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* Submit button */
 .assignment-form button[type="submit"] {
-  padding: 6px 8px;            /* Minimized button padding */
-  font-size: 0.85rem;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+  margin-top: 12px;
+  padding: 14px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: #fff;
+  background: linear-gradient(135deg, #a078d4, #7e5dbf);
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-.assignment-form button[type="submit"]:hover {
-  transform: scale(1.01);
+  box-shadow: 0 0 15px #a078d4aa;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* Ensure scrollbars appear on overflow */
-html, body {
-  height: auto;
-  overflow-y: auto;
+.assignment-form button[type="submit"]:hover,
+.assignment-form button[type="submit"]:focus {
+  background: linear-gradient(135deg, #8b62c9, #6a48b0);
+  box-shadow: 0 0 25px #8b62c9cc;
+  transform: scale(1.05);
 }
 
 /* Responsive tweaks */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .assignment-container {
+    width: 100%;
     max-width: 100%;
-    padding: 8px 10px;
-    border-radius: 10px;
+    max-height: 100vh;
+    padding: 20px;
+  }
+
+  .assignment-container h2 {
+    font-size: 1.8rem;
   }
 }
