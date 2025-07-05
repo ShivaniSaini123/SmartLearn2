@@ -44,7 +44,7 @@ const Register = ({ onSuccess }) => {
       if (response.ok) {
         onSuccess(email);
         setTimeout(() => {
-          navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
+          navigate("/verify-otp", { state: { email } });
         }, 500);
       } else {
         setError(data.message || 'Registration failed, please try again');

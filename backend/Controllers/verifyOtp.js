@@ -3,10 +3,21 @@ const User = require("../models/userSchema");
 const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
+  // ⬇️ Add this log to see what was received
+  console.log("Request Body:", req.body);
+
   try {
     const user = await User.findOne({ email });
-    console.log(user);
-    if (!user || user.otp !== otp || user.otpExpiresAt < Date.now()) {
+
+    // ⬇️ Add these logs after fetching user
+    console.log("Fetched User:", user);
+    if (user) {
+      console.log("Stored OTP:", user.otp);
+      console.log("Input OTP:", otp);
+      console.log("OTP Expiry:", user.otpExpiresAt, "Now:", Date.now());
+    }
+
+    if (!user || String(user.otp) !== String(otp) || user.otpExpiresAt < Date.now()) {
       return res.status(400).json({ message: "Invalid or expired OTP." });
     }
 

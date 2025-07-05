@@ -2,26 +2,27 @@
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align top for scroll flexibility */
   min-height: 100vh;
-  /* background: linear-gradient(to right, #1a0533, #2e0854); Dark theme */
-  padding: 1rem;
-   background: linear-gradient(135deg, #1b0033, #2e004f);
+  height: 100vh; /* Fixes height for scrolling */
+  overflow-y: auto; /* ✅ Enables vertical scroll */
+  padding: 2rem;
+  background: linear-gradient(135deg, #1b0033, #2e004f);
   box-sizing: border-box;
 }
 
+
 /* Card Box */
 .formCard {
+  width: 100%;
+  max-width: 1200px;
   padding: 2rem 4rem;
   background-color: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  /* width: 100%; */
-  max-width: 1200px;
+  box-sizing: border-box;
 }
-
-
 
 /* Title */
 .details-heading {

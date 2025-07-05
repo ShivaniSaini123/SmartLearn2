@@ -5,21 +5,42 @@ const addTimetable = async (req, res) => {
   try {
     const { branch, semester, exams } = req.body;
 
-    // Check if timetable already exists for the branch and semester
+    // Step 1: Check if timetable exists
     const existingTimetable = await ExamTimetable.findOne({ branch, semester });
+
     if (existingTimetable) {
-      return res.status(400).json({ message: 'Timetable already exists for this branch and semester.' });
+      // Step 2: Get existing subjects
+      const existingSubjects = existingTimetable.exams.map(exam => exam.subject.toLowerCase());
+
+      // Step 3: Check if any subject is already scheduled
+      const duplicateExam = exams.find(
+        exam => existingSubjects.includes(exam.subject.toLowerCase())
+      );
+
+      if (duplicateExam) {
+        return res.status(400).json({
+          message: `Subject "${duplicateExam.subject}" is already scheduled for this branch and semester.`,
+        });
+      }
+
+      // Step 4: Add new exams to existing timetable
+      existingTimetable.exams.push(...exams);
+      await existingTimetable.save();
+
+      return res.status(200).json({
+        message: 'New exams added to existing timetable!',
+        timetable: existingTimetable,
+      });
     }
 
-    // Create and save the new timetable
-    const newTimetable = new ExamTimetable({
-      branch,
-      semester,
-      exams,
-    });
-
+    // Step 5: If no timetable exists, create a new one
+    const newTimetable = new ExamTimetable({ branch, semester, exams });
     await newTimetable.save();
-    res.status(201).json({ message: 'Timetable added successfully!', timetable: newTimetable });
+
+    res.status(201).json({
+      message: 'Timetable created successfully!',
+      timetable: newTimetable,
+    });
   } catch (error) {
     res.status(500).json({ message: 'Error adding timetable', error: error.message });
   }

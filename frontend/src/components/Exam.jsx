@@ -10,7 +10,7 @@ const motivationalQuotes = [
   "Dream big and dare to fail.",
 ];
 
-const branches = ['CSE', 'ECE', 'ME', 'CE', 'EEE']; // example branches
+const branches = ['CSE', 'ECE', 'ME', 'CE', 'EE']; // example branches
 const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const ExamTimetable = () => {

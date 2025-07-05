@@ -9,9 +9,9 @@ body {
 
 /* Main container */
 .container {
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 16px 20px;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
@@ -24,40 +24,51 @@ body {
 .heading {
   text-align: center;
   color: #38f9d7;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
 /* Form layout */
 .form-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 1.5rem;
+  gap: 16px;
+  margin-bottom: 2rem;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Form groups */
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
+/* Labels */
 label {
   font-weight: 500;
-  margin-bottom: 0.25rem;
-  font-size: 0.85rem;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
   color: #ccc;
 }
 
+/* Inputs and Selects */
 input,
 select {
-  padding: 5px 8px;
-  font-size: 0.85rem;
+  padding: 8px 10px;
+  font-size: 0.9rem;
   border: 1px solid #444;
   border-radius: 6px;
   background: #2c2c3f;
-  color: black;
+  color: white;
   transition: border-color 0.3s;
+}
+
+input::placeholder {
+  color: #bbb;
 }
 
 input:focus,
@@ -68,7 +79,7 @@ select:focus {
 
 /* Section title */
 .section-title {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 0.5rem;
@@ -78,31 +89,33 @@ select:focus {
 .exam-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid #444;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
 }
 
 /* Time input layout */
 .time-inputs {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Add button */
+/* Add Exam button */
 .add-btn {
   margin-top: 10px;
-  padding: 6px 10px;
+  padding: 8px 14px;
   background-color: #3b82f6;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 .add-btn:hover {
@@ -111,11 +124,12 @@ select:focus {
 
 /* Submit button */
 .submit-btn {
-  margin-top: 10px;
-  padding: 8px 10px;
+  margin-top: 14px;
+  padding: 10px 16px;
   background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -123,44 +137,86 @@ select:focus {
 }
 
 .submit-btn:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 
-/* Fetch form */
-.fetch-form {
-  text-align: center;
-  margin-top: 1.5rem;
+/* Toggle buttons */
+.toggle-btns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.fetch-btn {
-  padding: 8px 12px;
-  background-color: #1d4ed8;
+.toggle-btn {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: white;
-  font-size: 0.85rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
   cursor: pointer;
-  margin-top: 0.5rem;
+  box-shadow: 0 3px 8px rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Back button */
+.back-btn {
+  background: none;
+  color: #7dd3fc;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #f472b6;
+  text-decoration: underline;
+}
+
+/* Fetch Button */
+.fetch-btn {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(252, 0, 255, 0.4);
 }
 
 .fetch-btn:hover {
-  background-color: #2563eb;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(252, 0, 255, 0.6);
 }
 
 /* Timetable display */
 .timetable-display {
-  margin-top: 1.5rem;
-  padding: 1rem;
+  margin-top: 2rem;
+  padding: 1.2rem;
   background-color: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #444;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .timetable-display h3 {
   text-align: center;
   color: #7dd3fc;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #444;
   padding-bottom: 0.5rem;
@@ -170,21 +226,28 @@ select:focus {
 .exam-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .exam-item {
   border-bottom: 1px solid #333;
   padding-bottom: 0.75rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #ddd;
 }
 
-/* Responsive tweak */
+/* Responsive */
 @media (max-width: 600px) {
   .container {
     max-width: 95%;
-    padding: 12px;
-    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .time-inputs {
+    flex-direction: column;
+  }
+
+  .toggle-btns {
+    flex-direction: column;
   }
 }
