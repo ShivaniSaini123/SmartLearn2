@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ProffTT.css";
-
+import { useNavigate } from "react-router-dom";
 const initialSubjectState = { subjectName: "", startTime: "", endTime: "", location: "" };
 
 const ProffTimeTable = () => {
@@ -9,7 +9,7 @@ const ProffTimeTable = () => {
   const [semester, setSemester] = useState("1");
   const [day, setDay] = useState("monday");
   const [subjects, setSubjects] = useState([initialSubjectState]);
-
+ const navigate = useNavigate();
   const handleInputChange = (e, index, field) => {
     setSubjects((prevSubjects) =>
       prevSubjects.map((sub, i) => (i === index ? { ...sub, [field]: e.target.value } : sub))
@@ -49,6 +49,24 @@ const ProffTimeTable = () => {
 <div className="timetable-page">
   <div className="timetable-container">
     <h2 className="timetable-title">Timetable Form</h2>
+   {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
 
     {/* Branch Select */}
     <div className="form-group">

@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { EmailContext } from "../contexts/EmailContext";
-
+import { useNavigate } from "react-router-dom";
 const AddAssignmentForm = ({ branch, refreshAssignments }) => {
+  const navigate = useNavigate();
   const { email } = useContext(EmailContext);
   const [submitted, setSubmitted] = useState(false);
   const [assignmentData, setAssignmentData] = useState({
@@ -77,6 +78,24 @@ const AddAssignmentForm = ({ branch, refreshAssignments }) => {
       <h2 className="form-title">
   {submitted ? `Edit Assignment for ${branch}` : `Add New Assignment for ${branch}`}
 </h2>
+ {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
 
       <input type="text" name="branch" placeholder="Branch" value={assignmentData.branch} onChange={handleChange} required />
       <input type="number" name="assignmentNumber" placeholder="Assignment Number" value={assignmentData.assignmentNumber} onChange={handleChange} required />

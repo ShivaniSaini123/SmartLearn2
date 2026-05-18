@@ -133,6 +133,7 @@ function App() {
           element={<ProfilePage/>}
         /> */}
         <Route path="/profile/:email" element={<ProfilePage />} />
+        
         <Route
           path="/chat"
           element={<ChatApp/>}

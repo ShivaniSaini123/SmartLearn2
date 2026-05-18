@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
-import "./ProffDash.css";
 
+import "./ProffDash.css";
+import { EmailContext } from "../contexts/EmailContext";
+import { handleLogout } from "./Logout";
+import { handleDeleteAccount } from "./DeleteAccountButton";
+import { FaUserCircle } from "react-icons/fa";
 const ProffDashBoard = () => {
   const navigate = useNavigate();
+   const { email, setEmail, branch, setBranch } = useContext(EmailContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ branch: "", subject: "", semester: "" });
   const [otp, setOtp] = useState("");
@@ -52,7 +58,50 @@ const ProffDashBoard = () => {
   
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Professor Dashboard</h1>
+     {/* TOP NAVBAR */}
+      <nav className="proff-navbar">
+       <div 
+  className="proff-title clickable-title"
+  onClick={() => navigate("/")}
+>
+  SmartLearn
+</div>
+
+
+        <div className="proff-actions">
+
+          {/* Prevent null email route error */}
+          <button
+            onClick={() => {
+              if (!email) {
+                alert("Email missing! Please log in again.");
+                return;
+              }
+              navigate(`/profile/${encodeURIComponent(email)}`);
+
+            }}
+            className="profile-btn"
+          >
+            <FaUserCircle size={26} />
+          </button>
+
+          <button
+            onClick={() => handleLogout(navigate, setEmail, setBranch)}
+            className="logout-btn"
+          >
+            Logout
+          </button>
+
+          <button
+            onClick={() => handleDeleteAccount(email, navigate, setEmail, setBranch)}
+            className="delete-btn"
+          >
+            Delete Account
+          </button>
+        </div>
+      </nav>
+
+      {/* <h1 className="dashboard-title">Professor Dashboard</h1> */}
 
       <div className="dashboard-grid">
         <button onClick={() => handleNavigation("/proffaddassign")} className="dashboard-btn">

@@ -5,31 +5,53 @@ import { EmailContext } from '../contexts/EmailContext';
 import DashboardWidgets from './DashboardWidgets';
 import { FaUserCircle } from 'react-icons/fa';
 import './Dashboard.css';
-
+import { handleLogout } from "./Logout";
+import { handleDeleteAccount } from "./DeleteAccountButton";
 const Dashboard = () => {
   const [userdata, setUserdata] = useState({});
-  const { email } = useContext(EmailContext);
+  const { email, setEmail, branch, setBranch } = useContext(EmailContext);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
-  const getUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/api/v1/students", { withCredentials: true });
-      setUserdata(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getUser = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/api/v1/students", { withCredentials: true });
+  //     setUserdata(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+useEffect(() => {
+  if (email) getUser();
+}, [email]);
 
+const getUser = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/api/v1/profile/${encodeURIComponent(email)}`, {
+      withCredentials: true,
+    });
+    setUserdata(response.data);
+  } catch (error) {
+    console.log("Profile fetch error:", error?.response?.status, error?.response?.data);
+  }
+};
   return (
     <div className="dashboard-container">
       {/* Horizontal Navbar */}
       <nav className="navbar-horizontal">
         <div className="navbar-title">Dashboard</div>
         <div className="button-container">
+         <button onClick={() => handleLogout(navigate, setEmail, setBranch)}>Logout</button>
+          <button
+            onClick={() => handleDeleteAccount(email, navigate, setEmail, setBranch)}
+            style={{ background: "red", color: "white" }}
+          >
+            Delete Account
+          </button>
           <button
             onClick={() => navigate(`/profile/${encodeURIComponent(email)}`)}
             className="profile-button"

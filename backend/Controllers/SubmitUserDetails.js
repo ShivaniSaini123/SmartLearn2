@@ -5,7 +5,9 @@ const submitUserDetails = async (req, res) => {
   console.log("Incoming request body:", req.body);
 
   const { email, name, yearOfStudy, department, college, phone, password, semester, role, identifier } = req.body;
-
+if (!email || email.trim() === "") {
+    return res.status(400).json({ message: "Email is required" });
+}
   try {
     const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
 
@@ -17,7 +19,7 @@ const submitUserDetails = async (req, res) => {
       user = new User({
         name: name || "Anonymous",
         email,
-        password: hashedPassword,
+        password: hashedPassword, 
         role: role || "Student",
         identifier: identifier || null,
         yearOfStudy: role === "Student" ? (yearOfStudy || "1") : undefined, // ✅ Year of Study only for Students

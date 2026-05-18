@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+      default: '',
   },
   password: {
     type: String,
@@ -52,3 +53,4 @@ const userSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("User", userSchema);
+

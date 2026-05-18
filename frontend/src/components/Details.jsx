@@ -9,7 +9,12 @@ const Details = ({ email: propEmail }) => {
   const editMode = location.state?.editMode || false;
   const userFromState = location.state?.user || null;
 
-  const [email, setEmail] = useState(propEmail || location.state?.email || "");
+  // const [email, setEmail] = useState(propEmail || location.state?.email || "");
+  const [email, setEmail] = useState(
+  propEmail ||
+  location.state?.email ||
+  localStorage.getItem("userEmail") || ""
+);
   const [formData, setFormData] = useState({
     name: "",
     password: "",

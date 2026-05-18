@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 function AddSyllabus() {
+  const navigate = useNavigate();
   const [branch, setBranch] = useState('');
   const [semester, setSemester] = useState('');
   const [subject, setSubject] = useState('');
@@ -112,12 +113,35 @@ function AddSyllabus() {
   .syllabus-form button:hover {
     opacity: 0.9;
   }
+      .go-back-btn {
+          width: auto;
+          padding: 8px 16px;
+          margin-bottom: 15px;
+          background: linear-gradient(120deg, #a078d4, #7e5dbf);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+
+        .go-back-btn:hover {
+          opacity: 0.85;
+        }
 `}
 </style>
 
 
 
       <form className="syllabus-form" onSubmit={handleSubmit}>
+         {/* Go Back Button */}
+        <button
+          type="button"
+          className="go-back-btn"
+          onClick={() => navigate(-1)}
+        >
+          ← Go Back
+        </button>
       <h2 style={{
   textAlign: 'center',
   background: 'linear-gradient(to right, #7928ca, #4facfe)',

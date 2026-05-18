@@ -64,45 +64,6 @@ const StudyMaterials = () => {
   }
 };
 
-//   const showAuraPointsPopup = () => {
-//     Swal.fire({
-//       title: 'Thala for a Reason!',
-//       text: 'Your aura points have increased by 7.',
-//       imageUrl: tireImage,
-//       imageWidth: 100,
-//       imageHeight: 100,
-//       imageAlt: 'Tire Image',
-//       background: '#212121',
-//       color: '#fff',
-//       confirmButtonColor: '#ff66ff',
-//       confirmButtonText: 'Awesome!',
-//       customClass: {
-//         popup: 'custom-swal-popup',
-//       },
-//     });
-//   };
-
-//   const toggleChapterCompletion = async (chapterName) => {
-//     if (!completedChapters[chapterName]) {
-//       try {
-//         await axios.post('http://localhost:4000/api/v1/increment-aura-points', {
-//           email: email,
-//           incrementValue: 7,
-//         });
-
-//         setCompletedChapters((prev) => ({
-//           ...prev,
-//           [chapterName]: true,
-//         }));
-
-//         showAuraPointsPopup();
-//       } catch (error) {
-//         console.error('Error updating aura points:', error);
-//         alert('Failed to update aura points. Please try again.');
-//       }
-//     }
-//   };
-
   useEffect(() => {
     loadSubjects();
   }, [selectedBranch, selectedSemester]);
@@ -114,6 +75,24 @@ const StudyMaterials = () => {
   return (
     <div className="page-container">
       <div className="viewer-box">
+         {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
         <div className="title-container">
           <h1 className="text-3xl font-bold mb-6">Syllabus Viewer</h1>
         </div>

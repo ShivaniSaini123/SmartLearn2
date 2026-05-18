@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './AttendanceForm.css';
-
+import { useNavigate } from "react-router-dom";
 const AttendanceForm = () => {
+   const navigate = useNavigate();
   const { email } = useParams();
   const [activeTab, setActiveTab] = useState('mark'); // Toggle between forms
   const [formData, setFormData] = useState({ branch: '', semester: '', subject: '', otp: '' });
@@ -51,6 +52,25 @@ const handleTabSwitch = (tab) => {
 
   return (
     <div className="attendance-container">
+       {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
+
       <div className="tab-buttons">
        <button className={activeTab === 'mark' ? 'active' : ''} onClick={() => handleTabSwitch('mark')}>Mark Attendance</button>
 <button className={activeTab === 'view' ? 'active' : ''} onClick={() => handleTabSwitch('view')}>See Attendance</button>

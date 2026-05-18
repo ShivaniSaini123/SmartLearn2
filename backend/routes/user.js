@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const router = express.Router();
+const authMiddleware = require("../middleware/auth");
 
 // Controllers
 const registerUser = require('../Controllers/registerUser');
@@ -36,6 +37,8 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 const upload = multer({ storage });
+const logoutUser = require("../Controllers/logoutUser");
+const deleteAccount = require("../Controllers/deleteAccount");
 
 //---------------------------- AUTH ROUTES ----------------------------//
 router.post('/register', registerUser);
@@ -135,5 +138,10 @@ router.use((req, res, next) => {
   console.log(`➡️  ${req.method} ${req.originalUrl}`);
   next();
 });
+// ------------------ LOGOUT & DELETE ------------------ //
+
+router.post("/logout", logoutUser);
+// routes/user.js (replace current line)
+router.delete("/delete-account", deleteAccount);
 
 module.exports = router;

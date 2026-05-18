@@ -484,8 +484,28 @@ useEffect(() => {
  
   return (
     <div className="chat-container">
+      
       <div className="chat-wrapper">
         <aside className="chat-sidebar">
+           {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
+
           <div className="sidebar-header">
             <div
               className="user-profile-circle"

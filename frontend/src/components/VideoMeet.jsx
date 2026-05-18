@@ -79,89 +79,6 @@ const VideoMeet = () => {
       setMessage(err.response?.data?.message || "❌ Error verifying OTP");
     }
   };
-
-//   return (
-//     <div style={{ padding: "20px", maxWidth: 500, margin: "auto" }}>
-//       <div style={{ textAlign: "center", marginBottom: 20 }}>
-//         <button
-//           onClick={toggleMode}
-//           style={{
-//             padding: "10px 20px",
-//             backgroundColor: "#007bff",
-//             color: "white",
-//             border: "none",
-//             borderRadius: 5,
-//             cursor: "pointer",
-//           }}
-//         >
-//           {isCreating ? "Want to Join a Meeting?" : "Want to Create a Meeting?"}
-//         </button>
-//       </div>
-
-//       {isCreating ? (
-//         <>
-//           <h2>Create a Meeting</h2>
-//           <input
-//             type="text"
-//             placeholder="Enter OTP for meeting"
-//             value={otp}
-//             onChange={(e) => setOtp(e.target.value)}
-//             style={{ width: "100%", marginBottom: 10, padding: 8 }}
-//           />
-//           <input
-//             type="number"
-//             placeholder="Duration (minutes)"
-//             value={duration}
-//             onChange={(e) => setDuration(Number(e.target.value))}
-//             style={{ width: "100%", marginBottom: 10, padding: 8 }}
-//             min={1}
-//           />
-//           <button onClick={createMeeting} style={{ width: "100%", padding: 10 }}>
-//             Create Meeting
-//           </button>
-
-//           {createdMeetingLink && (
-//             <p style={{ marginTop: 10, wordBreak: "break-word" }}>
-//               Meeting Link:{" "}
-//               <a href={createdMeetingLink} target="_blank" rel="noopener noreferrer">
-//                 {createdMeetingLink}
-//               </a>
-//             </p>
-//           )}
-//         </>
-//       ) : (
-//         <>
-//           <h2>Join a Meeting</h2>
-//           <input
-//             type="text"
-//             placeholder="Enter full meeting link or path (e.g. /meet/xyz or https://...)"
-//             value={joinLinkInput}
-//             onChange={(e) => setJoinLinkInput(e.target.value)}
-//             style={{ width: "100%", marginBottom: 10, padding: 8 }}
-//           />
-//           <input
-//             type="text"
-//             placeholder="Enter OTP"
-//             value={joinOtp}
-//             onChange={(e) => setJoinOtp(e.target.value)}
-//             style={{ width: "100%", marginBottom: 10, padding: 8 }}
-//           />
-//           <button onClick={verifyAndJoin} style={{ width: "100%", padding: 10 }}>
-//             Join Meeting
-//           </button>
-//         </>
-//       )}
-
-//       {message && (
-//         <p style={{ marginTop: 20, color: message.startsWith("✅") ? "green" : "red" }}>
-//           {message}
-//         </p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default VideoMeet;
  return (
     <div className="video-meet-container">
       <div style={{ textAlign: "center" }}>
@@ -169,7 +86,24 @@ const VideoMeet = () => {
           {isCreating ? "Want to Join a Meeting?" : "Want to Create a Meeting?"}
         </button>
       </div>
-
+ {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
       {isCreating ? (
         <>
           <h2>Create a Meeting</h2>

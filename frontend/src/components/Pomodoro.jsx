@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { FaCog } from "react-icons/fa";
 import { Dialog } from "@headlessui/react";
 import "./Pomodoro.css";
-
+import { useNavigate } from "react-router-dom";
 const PomodoroTimer = () => {
+  const navigate = useNavigate();
   const [time, setTime] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("work");
@@ -33,7 +34,24 @@ const PomodoroTimer = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-white bg-gradient-to-br from-purple-950 via-fuchsia-800 to-black p-6">
       <h1 className="text-5xl font-extrabold mb-8 drop-shadow-[0_2px_4px_rgba(255,0,255,0.4)]">Stay Focused</h1>
-
+       {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
       <div className="text-3xl font-bold bg-white text-black px-6 py-3 rounded-xl shadow-lg mb-6">
         Pomodoro
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Exam.css';
-
+import { useNavigate } from "react-router-dom";
 const motivationalQuotes = [
   "Believe you can and you're halfway there.",
   "The harder you work for something, the greater you’ll feel when you achieve it.",
@@ -21,7 +21,7 @@ const ExamTimetable = () => {
   const [error, setError] = useState('');
   const [quote, setQuote] = useState('');
   const [timeLeft, setTimeLeft] = useState(null);
-
+ const navigate = useNavigate();
   const getRandomQuote = () => {
     const randomIndex = Math.floor(Math.random() * motivationalQuotes.length);
     return motivationalQuotes[randomIndex];
@@ -80,7 +80,24 @@ const ExamTimetable = () => {
   return (
     <div className="exam-timetable-container">
       <h2>Select Your Branch and Semester</h2>
-
+ {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
       <div className="form-section">
         <label>
           Branch:

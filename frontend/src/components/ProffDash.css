@@ -1,4 +1,110 @@
 /* Dashboard Container */
+/* ----------------------------- */
+/*        TOP NAVBAR STYLES      */
+/* ----------------------------- */
+
+.proff-navbar {
+    width: 100%;
+    padding: 12px 30px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Clickable SmartLearn Title */
+.clickable-title {
+    cursor: pointer;
+    color: #e7d2ff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(200, 150, 255, 0.6);
+    transition: transform 0.2s ease, text-shadow 0.3s ease;
+}
+
+.clickable-title:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 18px rgba(200, 150, 255, 0.9);
+}
+
+
+.proff-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ----------------------------- */
+/*          PROFILE BUTTON       */
+/* ----------------------------- */
+
+.profile-btn {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s ease, box-shadow .3s ease;
+}
+
+.profile-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px rgba(216, 160, 247, 0.8);
+}
+
+/* ----------------------------- */
+/*          LOGOUT BUTTON        */
+/* ----------------------------- */
+
+.logout-btn {
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #ff9d4c, #e76a22);
+    transition: transform .25s ease, box-shadow .3s ease;
+    box-shadow: 0 0 10px rgba(255, 155, 80, 0.4);
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255, 155, 80, 0.7);
+}
+
+/* ----------------------------- */
+/*       DELETE ACCOUNT BUTTON   */
+/* ----------------------------- */
+
+.delete-btn {
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #ff4c61, #c7162b);
+    transition: transform .25s ease, box-shadow .3s ease;
+    box-shadow: 0 0 12px rgba(255, 70, 80, 0.5);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255, 70, 80, 0.75);
+}
+
 .dashboard-container {
     display: flex;
     flex-direction: column;

@@ -118,66 +118,52 @@ const getCurrentTime = () => new Date(); // make sure this is defined somewhere
 // Mark Attendance
 const markAttendance = async (req, res) => {
   const { email, branch, semester, subject, otp } = req.body;
-  console.log("Incoming request body:", req.body);
 
-  if (!email) {
-    return res.status(400).json({ error: "Email is required to mark attendance." });
-  }
+  if (!email) return res.status(400).json({ error: "Email is required" });
 
   try {
     const attendance = await Attendance.findOne({ branch, semester });
-
-    if (!attendance || !attendance.subjects.has(subject)) {
-      console.log("Subject not found in attendance DB");
+    if (!attendance || !attendance.subjects.has(subject))
       return res.status(400).json({ error: "Invalid OTP or details." });
-    }
 
     const storedOtp = attendance.subjects.get(subject);
-
-    console.log("Stored OTP:", `'${storedOtp}'`);
-    console.log("User Provided OTP:", `'${otp}'`);
-
-    if (!storedOtp || storedOtp.toString().trim() !== otp.toString().trim()) {
-      console.log("OTP mismatch");
+    if (!storedOtp || storedOtp.toString().trim() !== otp.toString().trim())
       return res.status(400).json({ error: "Invalid OTP or details." });
-    }
 
-    let record = await AttendanceRecord.findOne({ email, branch, semester });
+    // Update existing record or create new one
+   let record = await AttendanceRecord.findOne({ email, branch, semester });
 
-    if (!record) {
-      record = new AttendanceRecord({
-        email,
-        branch,
-        semester,
-        subjects: [{ subject, attended: 1, missed: 0, lastMarked: getCurrentTime() }],
-      });
-    } else {
-      const existingSubject = record.subjects.find(sub => sub.subject === subject);
+if (!record) {
+  record = new AttendanceRecord({
+    email,
+    branch,
+    semester,
+    subjects: [{ subject, attended: 1, missed: 0, lastMarked: getCurrentTime() }],
+  });
+} else {
+  const existingSubject = record.subjects.find(sub => sub.subject === subject);
 
-      if (existingSubject) {
-        const now = new Date();
-        const lastMarked = new Date(existingSubject.lastMarked);
+  if (existingSubject) {
+    const now = getCurrentTime();
+    const lastMarked = new Date(existingSubject.lastMarked);
+    const diff = (now - lastMarked) / 1000;
+    if (diff < 30) return res.status(400).json({ error: "Attendance already marked recently." });
+    existingSubject.attended += 1;
+    existingSubject.lastMarked = now;
+  } else {
+    record.subjects.push({ subject, attended: 1, missed: 0, lastMarked: getCurrentTime() });
+  }
+}
 
-        const diff = (now - lastMarked) / 1000; // seconds
-        if (diff < 30) {
-          return res.status(400).json({ error: "Attendance already marked recently." });
-        }
+await record.save();
 
-        existingSubject.attended += 1;
-        existingSubject.lastMarked = getCurrentTime();
-      } else {
-        record.subjects.push({ subject, attended: 1, missed: 0, lastMarked: getCurrentTime() });
-      }
-    }
-
-    await record.save();
     res.status(200).json({ message: "Attendance marked successfully." });
-
   } catch (err) {
     console.error("Error marking attendance:", err);
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 module.exports = {
   markAttendance,

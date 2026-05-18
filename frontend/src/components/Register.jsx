@@ -41,12 +41,20 @@ const Register = ({ onSuccess }) => {
 
       const data = await response.json();
 
+      // if (response.ok) {
+      //   onSuccess(email);
+      //   setTimeout(() => {
+      //     navigate("/verify-otp", { state: { email } });
+      //   }, 500);
+      // } 
       if (response.ok) {
-        onSuccess(email);
-        setTimeout(() => {
-          navigate("/verify-otp", { state: { email } });
-        }, 500);
-      } else {
+  localStorage.setItem("userEmail", email);  
+  onSuccess(email);
+  setTimeout(() => {
+    navigate("/verify-otp", { state: { email } });
+  }, 500);
+}
+      else {
         setError(data.message || 'Registration failed, please try again');
         setIsLoading(false);
       }

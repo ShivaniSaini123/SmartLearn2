@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Timetable.css';
-
+import { useNavigate } from "react-router-dom";
 const Timetable = ({ semester, branch }) => {
   const [timetable, setTimetable] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   // Fetch timetable data based on semester and branch
   useEffect(() => {
     const fetchTimetable = async () => {
@@ -28,7 +28,24 @@ const Timetable = ({ semester, branch }) => {
   return (
     <div className="timetable-container" id="timetable-container27">
       <h2 id="timetable-header27">Timetable</h2>
-
+ {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
       <div className="timetable-grid" id="timetable-grid27">
         {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
           const daySchedule = timetable[day];

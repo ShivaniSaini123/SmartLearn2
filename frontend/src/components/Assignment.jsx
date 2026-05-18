@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Assignment.css"; 
 import AddAssignmentForm from "./AddAssignmentForm"; // Import the form component
-
+import { useNavigate } from "react-router-dom";
 const AssignmentsList = () => {
+   const navigate = useNavigate();
   const [assignments, setAssignments] = useState([]);
   const [groupedAssignments, setGroupedAssignments] = useState({});
   const [selectedBranch, setSelectedBranch] = useState(null);
@@ -39,6 +40,24 @@ const AssignmentsList = () => {
 
   return (
     <div className="assignments-container">
+       {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
       <h1 className="title">All Assignments</h1>
 
       <div className="scrollable-content">

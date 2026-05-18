@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './proffExam.css';
-
+import { useNavigate } from "react-router-dom";
 const ProffExam = () => {
   const [activeTab, setActiveTab] = useState(null); // 'view' or 'add'
   const [branch, setBranch] = useState('');
   const [semester, setSemester] = useState('');
   const [exams, setExams] = useState([{ subject: '', date: '', startTime: '', endTime: '' }]);
   const [timetable, setTimetable] = useState(null);
-
+const navigate = useNavigate();
   const handleExamChange = (index, field, value) => {
     const newExams = [...exams];
     newExams[index][field] = value;
@@ -51,7 +51,24 @@ const ProffExam = () => {
   return (
   <div className="container">
     <h2 className="heading">Exam Timetable Management</h2>
-
+ {/* Go Back Button */}
+      <button
+        type="button"
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "15px",
+          padding: "8px 16px",
+          background: "linear-gradient(120deg, #a078d4, #7e5dbf)",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        ← Go Back
+      </button>
     {!activeTab && (
       <div className="toggle-btns">
         <button className="toggle-btn" onClick={() => setActiveTab('view')}>
