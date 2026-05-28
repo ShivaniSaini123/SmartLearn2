@@ -32,8 +32,15 @@ const navigate = useNavigate();
       setSemester('');
       setExams([{ subject: '', date: '', startTime: '', endTime: '' }]);
     } catch (error) {
-      alert('Error adding timetable');
-    }
+
+  console.log(error.response?.data);
+
+  alert(
+    error.response?.data?.message ||
+    error.response?.data?.error ||
+    "Error adding timetable"
+  );
+}
   };
 
   const handleGetTimetable = async (e) => {
@@ -123,7 +130,7 @@ const navigate = useNavigate();
     )}
 
     {activeTab === 'add' && (
-      <form className="form-section">
+     <form className="form-section" onSubmit={handleAddTimetable}>
         <div className="form-group">
           <label>Branch:</label>
           <select value={branch} onChange={(e) => setBranch(e.target.value)}>

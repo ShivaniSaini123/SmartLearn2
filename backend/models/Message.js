@@ -14,19 +14,72 @@ const conversationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  messages: [
-    {
-      from: { type: String, required: true },
-      to: { type: String, required: true },
-      // content: { type: String, required: true },
-      content: { type: String, required: true }, // text, URL, or base64 string
-   type: { type: String, enum: ['text', 'image', 'gif', 'audio', 'video', 'file'] },
+  // messages: [
+  //   {
+  //     from: { type: String, required: true },
+  //     to: { type: String, required: true },
+  //     // content: { type: String, required: true },
+  //     content: { type: String, required: true }, // text, URL, or base64 string
+  //  type: { type: String, enum: ['text', 'image', 'gif', 'audio', 'video', 'file'] },
 
-      timestamp: { type: Date, default: Date.now },
-      delivered: { type: Boolean, default: false },  // <-- new field
-      read: { type: Boolean, default: false },
+  //     timestamp: { type: Date, default: Date.now },
+  //     delivered: { type: Boolean, default: false },  // <-- new field
+  //     read: { type: Boolean, default: false },
+  //   },
+  // ],
+  messages: [
+  {
+    from: {
+      type: String,
+      required: true,
     },
-  ],
+
+    to: {
+      type: String,
+      required: true,
+    },
+
+    // Text OR Cloudinary URL
+    content: {
+      type: String,
+      required: true,
+    },
+
+    // Message type
+    type: {
+      type: String,
+      enum: ['text', 'image', 'gif', 'audio', 'video', 'file'],
+      default: 'text',
+    },
+
+    // Original uploaded file name
+    fileName: {
+      type: String,
+      default: '',
+    },
+
+    // Cloudinary public ID
+    publicId: {
+      type: String,
+      default: '',
+    },
+
+    timestamp: {
+      type: Date,
+      default: Date.now,
+    },
+
+    delivered: {
+      type: Boolean,
+      default: false,
+    },
+
+    read: {
+      type: Boolean,
+      default: false,
+    },
+  },
+],
   unreadCounts: {
     type: Map,
     of: Number,

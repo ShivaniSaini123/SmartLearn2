@@ -262,37 +262,47 @@ const getFileType = (file) => {
   }
   return "file";
 };
+const sendFileToServer = async (file) => {
+  const formData = new FormData();
 
+  formData.append("file", file);
+  formData.append("sender", email);
+  formData.append("recipient", selectedUser.email);
+  formData.append("type", getFileType(file));
+
+  const res = await axios.post(
+    "http://localhost:4000/api/v1/send-file",
+    formData
+  );
+
+  return res.data;
+};
 const sendMessage = async () => {
   if (!message.trim() && !file) return;
   if (!selectedUser) return;
-  if (!socketRef.current) return;  // Safety check
-   const timestamp = new Date();
+  if (!socketRef.current) return;
+
+  const timestamp = new Date();
+
   if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Data = reader.result;
-      const newMessage = {
-        from: email,
-        to: selectedUser.email,
-        content: base64Data,
-        type: getFileType(file),
-        timestamp,
-      };
-      socketRef.current.emit("send_message", newMessage);
-      setChats((prev) => {
-        const updated = { ...prev };
-        const thread = updated[selectedUser.email] || [];
-        updated[selectedUser.email] = [...thread, newMessage];
-        return updated;
-      });
-      setFile(null); // ✅ Clear file input
-      if (fileInputRef.current) fileInputRef.current.value = null; // ✅ Clear actual input value
-    };
-    reader.readAsDataURL(file);
+    const res = await sendFileToServer(file);
+
+    const savedMessage = res.data;
+  socketRef.current.emit("send_message", savedMessage);
+    setChats((prev) => {
+      const updated = { ...prev };
+      const thread = updated[selectedUser.email] || [];
+
+      updated[selectedUser.email] = [...thread, savedMessage];
+      return updated;
+    });
+
+    setFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = null;
+
     return;
   }
-// For text message
+
   const newMessage = {
     from: email,
     to: selectedUser.email,
@@ -300,16 +310,19 @@ const sendMessage = async () => {
     type: "text",
     timestamp,
   };
-   socketRef.current.emit("send_message", newMessage);
-   setChats((prev) => {
+
+  socketRef.current.emit("send_message", newMessage);
+
+  setChats((prev) => {
     const updated = { ...prev };
     const thread = updated[selectedUser.email] || [];
+
     updated[selectedUser.email] = [...thread, newMessage];
     return updated;
   });
+
   setMessage("");
 };
-
 // Update message read/delivered status
 useEffect(() => {
   if (!socketRef.current) return;

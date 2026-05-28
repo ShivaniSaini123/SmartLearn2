@@ -21,6 +21,7 @@ const io = new Server(server, {
     credentials: true
   }
 });
+app.set("io", io);
 // ✅ Middleware
 app.use(
   cors({
@@ -31,7 +32,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 // API Routes
 app.use('/api/v1', userRoutes);

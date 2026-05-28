@@ -24,6 +24,11 @@ export default function ProfilePage() {
         if (!response.ok) throw new Error("User not found");
         const data = await response.json();
         setUser(data);
+        // SAVE PROFILE IN LOCAL STORAGE
+      localStorage.setItem(
+      "userProfile",
+      JSON.stringify(data)
+      );
       } catch (err) {
         setError(err.message);
       } finally {

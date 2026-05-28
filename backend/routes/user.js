@@ -1,6 +1,7 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
+// const multer = require('multer');
+// const path = require('path');
+const upload = require("../middleware/cloudinaryUpload");
 const router = express.Router();
 const authMiddleware = require("../middleware/auth");
 
@@ -30,13 +31,6 @@ const {
   sendConnectionRequest,
   acceptConnectionRequest,rejectConnectionRequest, deleteContact
 } = require('../Controllers/getUserByEmail');
-
-// Multer setup for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/assignments/'),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
-});
-const upload = multer({ storage });
 const logoutUser = require("../Controllers/logoutUser");
 const deleteAccount = require("../Controllers/deleteAccount");
 
@@ -71,8 +65,12 @@ router.use('/api', syllabusController);
 router.get('/assignments', getAllAssignments);
 router.post('/assignment', addSubmission);
 router.post('/submit', submitAssignment);
-router.post('/addAssignmentProff', addAssignmentProff);
-
+// router.post('/addAssignmentProff', addAssignmentProff);
+router.post(
+  '/addAssignmentProff',
+  upload.array('attachments', 5),
+  addAssignmentProff
+);
 //---------------------------- GOALS ROUTES ----------------------------//
 router.post('/goals', goalController.createGoal);
 router.get('/goals/:userId', goalController.getGoalsByUser);
@@ -120,6 +118,62 @@ router.post("/send", async (req, res) => {
     res.status(500).json({ error: "Failed to send message" });
   }
 });
+router.post(
+  "/send-file",
+  upload.single("file"),
+  async (req, res) => {
+    try {
+      const {
+        sender,
+        recipient,
+        type,
+        timestamp,
+        recipientOnline,
+      } = req.body;
+
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          message: "No file uploaded",
+        });
+      }
+
+      const msgData = {
+        from: sender.trim().toLowerCase(),
+        to: recipient.trim().toLowerCase(),
+
+        // Cloudinary URL
+        content: req.file.path,
+
+        type: type || "file",
+        timestamp: timestamp || new Date(),
+      };
+
+      const savedMessage = await msgController.saveMessage(
+        msgData,
+        recipientOnline,
+        req.app.get("io")
+      );
+
+      if (recipientOnline) {
+        await msgController.markMessagesDelivered(recipient, sender);
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "File sent successfully",
+        data: savedMessage,
+      });
+
+    } catch (err) {
+      console.error("File upload error:", err);
+      res.status(500).json({
+        success: false,
+        message: "Failed to send file",
+      });
+    }
+  }
+);
 router.post("/mark-delivered", async (req, res) => {
   const { user1, user2 } = req.body;
   await msgController.markMessagesDelivered(user1, user2);

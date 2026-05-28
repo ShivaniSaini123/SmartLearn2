@@ -3,6 +3,7 @@ const ExamTimetable = require('../models/examSchema');
 
 const addTimetable = async (req, res) => {
   try {
+     console.log(req.body);
     const { branch, semester, exams } = req.body;
 
     // Step 1: Check if timetable exists
@@ -10,12 +11,14 @@ const addTimetable = async (req, res) => {
 
     if (existingTimetable) {
       // Step 2: Get existing subjects
-      const existingSubjects = existingTimetable.exams.map(exam => exam.subject.toLowerCase());
+      const existingSubjects = existingTimetable.exams.map(
+  exam => exam.subject?.toLowerCase()
+);
 
       // Step 3: Check if any subject is already scheduled
       const duplicateExam = exams.find(
-        exam => existingSubjects.includes(exam.subject.toLowerCase())
-      );
+  exam => existingSubjects.includes(exam.subject?.toLowerCase())
+);
 
       if (duplicateExam) {
         return res.status(400).json({
@@ -42,8 +45,14 @@ const addTimetable = async (req, res) => {
       timetable: newTimetable,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error adding timetable', error: error.message });
-  }
+
+  console.log(error);
+
+  res.status(500).json({
+    message: 'Error adding timetable',
+    error: error.message
+  });
+}
 };
 
 // Controller to get timetable based on branch and semester
