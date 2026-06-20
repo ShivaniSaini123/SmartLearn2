@@ -6,6 +6,7 @@ const goalSchema = new mongoose.Schema({
   type: { type: String, enum: ["daily", "weekly", "monthly"], default: "daily" },
   priority: { type: String, enum: ["low", "medium", "high"], default: "medium" },
   deadline: { type: Date },
+  completed: { type: Boolean, default: false },
   userId: { type: String, ref: "User", required: true }, // Link to the user
 }, { timestamps: true });
 

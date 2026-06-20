@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -7,20 +6,27 @@ import reportWebVitals from './reportWebVitals';
 import { EmailProvider } from './contexts/EmailContext';
 import { OutputProvider } from './contexts/OutputContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Force scroll fix directly on DOM before React mounts
+const rootEl = document.getElementById('root');
+rootEl.style.height = 'auto';
+rootEl.style.minHeight = '100vh';
+rootEl.style.overflow = 'visible';
+
+document.documentElement.style.height = 'auto';
+document.documentElement.style.overflowX = 'hidden';
+
+document.body.style.height = 'auto';
+document.body.style.minHeight = '100vh';
+document.body.style.overflowX = 'hidden';
+document.body.style.overflowY = 'auto';
+
+const root = ReactDOM.createRoot(rootEl);
 root.render(
   <EmailProvider>
-  <OutputProvider>
-  
-  
-    <App />
-
-    
-  </OutputProvider>
+    <OutputProvider>
+      <App />
+    </OutputProvider>
   </EmailProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
