@@ -1,4 +1,5 @@
 const Goal = require('../models/GoalSchema');
+const { checkAndAwardBadges } = require('./achievementController');
 
 exports.createGoal = async (req, res) => {
   try {
@@ -43,6 +44,9 @@ exports.updateGoal = async (req, res) => {
       if (!updatedGoal) {
         return res.status(404).json({ message: "Goal not found" });
       }
+
+      // Re-check badges in case this update marked the goal completed.
+      await checkAndAwardBadges(updatedGoal.userId);
   
       res.status(200).json({ message: "Goal updated successfully", data: updatedGoal });
     } catch (error) {
@@ -50,6 +54,29 @@ exports.updateGoal = async (req, res) => {
       res.status(500).json({ error: "Failed to update goal" });
     }
   };
+
+/* PATCH /goals/:id/toggle — flips `completed` true/false.
+   This is the route DashboardWidgets.js actually calls; it didn't exist before,
+   so clicking a goal in the dashboard was hitting a 404. */
+exports.toggleGoal = async (req, res) => {
+  try {
+    const goal = await Goal.findById(req.params.id);
+    if (!goal) {
+      return res.status(404).json({ message: "Goal not found" });
+    }
+
+    goal.completed = !goal.completed;
+    await goal.save();
+
+    // Re-check badges every time a goal's completion state changes.
+    await checkAndAwardBadges(goal.userId);
+
+    res.status(200).json(goal);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to toggle goal" });
+  }
+};
   
   
 exports.deleteGoal = async (req, res) => {
@@ -63,4 +90,3 @@ exports.deleteGoal = async (req, res) => {
       res.status(500).json({ error: "Failed to delete goal" });
     }
   };
-  

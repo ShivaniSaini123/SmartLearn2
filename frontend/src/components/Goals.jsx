@@ -142,6 +142,30 @@ const navigate = useNavigate();
     }
   };
 
+  const handleToggle = async (goalId) => {
+  setLoading(true);
+  try {
+    const res = await fetch(`http://localhost:4000/api/v1/goals/${goalId}/toggle`, {
+      method: "PATCH",
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      setGoals((prev) =>
+        prev.map((g) => (g._id === goalId ? result : g))
+      );
+    } else {
+      alert("❌ Error: " + (result.message || result.error));
+    }
+  } catch (err) {
+    console.error("Toggle error:", err);
+    alert("❌ Could not update goal.");
+  } finally {
+    setLoading(false);
+  }
+};
+
   const handleEditClick = (goal) => {
     setGoalBeingEdited(goal._id);
     setEditForm({
@@ -310,17 +334,22 @@ const navigate = useNavigate();
                   </button>
                 </form>
               ) : (
-                <>
-                  <h4>{goal.title}</h4>
-                  <p>{goal.description}</p>
-                  <p>Type: {goal.type}</p>
-                  <p>Priority: {goal.priority}</p>
-                  <p>Deadline: {new Date(goal.deadline).toLocaleDateString()}</p>
-                  <button onClick={() => handleEditClick(goal)}>✏ Edit</button>
-                  <button onClick={() => handleDelete(goal._id)} className="delete-btn">
-                    🗑 Delete
-                  </button>
-                </>
+               <>
+  <h4 style={{ textDecoration: goal.completed ? "line-through" : "none" }}>
+    {goal.title}
+  </h4>
+  <p>{goal.description}</p>
+  <p>Type: {goal.type}</p>
+  <p>Priority: {goal.priority}</p>
+  <p>Deadline: {new Date(goal.deadline).toLocaleDateString()}</p>
+  <button onClick={() => handleToggle(goal._id)} className="toggle-btn">
+    {goal.completed ? "✅ Done" : "☐ Mark as Done"}
+  </button>
+  <button onClick={() => handleEditClick(goal)}>✏ Edit</button>
+  <button onClick={() => handleDelete(goal._id)} className="delete-btn">
+    🗑 Delete
+  </button>
+</>
               )}
             </div>
           ))

@@ -1,228 +1,229 @@
-/* Page background */
-body {
-  background: linear-gradient(to right, #1f0036, #0d0221);
-  margin: 0;
-  padding: 10px 5px;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  color: #f0f0f0;
-}
+/* ══════════════════════════════════════
+   ProffExam.css — Exam Timetable Management
+══════════════════════════════════════ */
 
-/* Main container */
 .container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
 }
 
-/* Heading */
 .heading {
   text-align: center;
-  color: #38f9d7;
-  font-size: 1.5rem;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(120deg, #a078d4, #7e5dbf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Form layout */
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 2rem;
-  padding: 16px;
-  background-color: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Form groups */
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Labels */
-label {
-  font-weight: 500;
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-/* Inputs and Selects */
-input,
-select {
-  padding: 8px 10px;
-  font-size: 0.9rem;
-  border: 1px solid #444;
-  border-radius: 6px;
-  background: #2c2c3f;
+/* ── Go Back / Back buttons ── */
+.go-back-btn,
+.back-btn {
+  margin-bottom: 15px;
+  padding: 8px 16px;
+  background: linear-gradient(120deg, #a078d4, #7e5dbf);
   color: white;
-  transition: border-color 0.3s;
-}
-
-input::placeholder {
-  color: #bbb;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #38f9d7;
-}
-
-/* Section title */
-.section-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-/* Exam cards */
-.exam-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid #444;
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
-}
-
-/* Time input layout */
-.time-inputs {
-  display: flex;
-  gap: 12px;
-}
-
-/* Add Exam button */
-.add-btn {
-  margin-top: 10px;
-  padding: 8px 14px;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.add-btn:hover {
-  background-color: #2563eb;
-}
-
-/* Submit button */
-.submit-btn {
-  margin-top: 14px;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s;
+  font-weight: bold;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.go-back-btn:hover,
+.back-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(160, 120, 212, 0.35);
 }
 
-.submit-btn:hover {
-  transform: scale(1.02);
-}
-
-/* Toggle buttons */
+/* ── Toggle buttons (See Timetable / Add Exam Schedule) ── */
 .toggle-btns {
   display: flex;
-  justify-content: center;
   gap: 16px;
-  margin-bottom: 24px;
+  justify-content: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
 }
 
 .toggle-btn {
-  padding: 10px 16px;
-  font-size: 0.95rem;
+  padding: 14px 28px;
+  font-size: 15px;
   font-weight: 600;
-  color: white;
   border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+  border-radius: 12px;
+  background: rgba(160, 120, 212, 0.12);
+  color: #c9aef0;
+  border: 1.5px solid rgba(160, 120, 212, 0.3);
   cursor: pointer;
-  box-shadow: 0 3px 8px rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
 }
-
 .toggle-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
-}
-
-/* Back button */
-.back-btn {
-  background: none;
-  color: #7dd3fc;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 12px;
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-
-.back-btn:hover {
-  color: #f472b6;
-  text-decoration: underline;
-}
-
-/* Fetch Button */
-.fetch-btn {
-  padding: 10px 16px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  background: linear-gradient(120deg, #a078d4, #7e5dbf);
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 10px rgba(252, 0, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(160, 120, 212, 0.4);
 }
 
-.fetch-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(252, 0, 255, 0.6);
+/* ── Form Section ── */
+.form-section {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* Timetable display */
-.timetable-display {
-  margin-top: 2rem;
-  padding: 1.2rem;
-  background-color: rgba(255, 255, 255, 0.04);
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9aef0;
+}
+
+.form-group select,
+.form-group input {
+  padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #444;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #a078d4;
+  box-shadow: 0 0 8px rgba(160, 120, 212, 0.35);
+}
+.form-group select option {
+  color: #000;
 }
 
-.timetable-display h3 {
-  text-align: center;
-  color: #7dd3fc;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #444;
-  padding-bottom: 0.5rem;
+/* ── Fetch / Submit buttons ── */
+.fetch-btn,
+.submit-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(120deg, #a078d4, #7e5dbf);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.25s;
+  align-self: flex-start;
+}
+.fetch-btn:hover,
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(160, 120, 212, 0.4);
 }
 
-/* List of exams */
+/* ── Section title ── */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #c9aef0;
+  margin-bottom: 12px;
+  margin-top: 4px;
+}
+
+/* ── Exam input cards (Add Exam Schedule form) ── */
+.exam-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exam-card input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.exam-card input:focus {
+  border-color: #a078d4;
+  box-shadow: 0 0 8px rgba(160, 120, 212, 0.35);
+}
+.exam-card input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.time-inputs {
+  display: flex;
+  gap: 10px;
+}
+.time-inputs input { flex: 1; }
+
+.remove-row-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 79, 129, 0.15);
+  color: #ff4f81;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.remove-row-btn:hover { background: rgba(255, 79, 129, 0.3); }
+
+/* ── Add Another Exam button ── */
+.add-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1.5px dashed rgba(160, 120, 212, 0.4);
+  background: transparent;
+  color: #c9aef0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  margin-bottom: 10px;
+}
+.add-btn:hover {
+  background: rgba(160, 120, 212, 0.1);
+  border-color: #a078d4;
+}
+
+/* ── Timetable display ── */
+.timetable-display {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+}
+
 .exam-list {
   display: flex;
   flex-direction: column;
@@ -230,24 +231,126 @@ select:focus {
 }
 
 .exam-item {
-  border-bottom: 1px solid #333;
-  padding-bottom: 0.75rem;
-  font-size: 0.9rem;
-  color: #ddd;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #a078d4;
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: background 0.2s, transform 0.15s;
+}
+.exam-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
 }
 
-/* Responsive */
+.exam-item p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #ddd;
+}
+.exam-item p strong {
+  color: #c9aef0;
+}
+
+/* ── Edit / Delete action buttons ── */
+.exam-item-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.edit-exam-btn,
+.delete-exam-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s, background 0.2s;
+}
+
+.edit-exam-btn {
+  background: linear-gradient(120deg, #a078d4, #7e5dbf);
+  color: white;
+}
+.edit-exam-btn:hover { transform: translateY(-1px); }
+
+.delete-exam-btn {
+  background: rgba(255, 79, 129, 0.15);
+  color: #ff4f81;
+  border: 1px solid rgba(255, 79, 129, 0.3);
+}
+.delete-exam-btn:hover { background: rgba(255, 79, 129, 0.25); }
+
+/* ── Inline edit form (replaces exam-item content when editing) ── */
+.exam-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exam-edit-form input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.exam-edit-form input:focus {
+  border-color: #a078d4;
+  box-shadow: 0 0 8px rgba(160, 120, 212, 0.35);
+}
+.exam-edit-form input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.exam-edit-error {
+  color: #ff4f81;
+  font-size: 12px;
+  margin: 0;
+}
+
+.exam-edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-edit-btn,
+.cancel-edit-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.save-edit-btn {
+  background: linear-gradient(120deg, #4caf50, #45a049);
+  color: white;
+}
+.save-edit-btn:hover { transform: translateY(-1px); }
+
+.cancel-edit-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.cancel-edit-btn:hover { background: rgba(255, 255, 255, 0.14); }
+
+/* ── Responsive ── */
 @media (max-width: 600px) {
-  .container {
-    max-width: 95%;
-    padding: 14px;
-  }
-
-  .time-inputs {
-    flex-direction: column;
-  }
-
-  .toggle-btns {
-    flex-direction: column;
-  }
+  .heading { font-size: 22px; }
+  .toggle-btns { flex-direction: column; align-items: stretch; }
+  .toggle-btn { width: 100%; text-align: center; }
+  .time-inputs { flex-direction: column; }
+  .fetch-btn, .submit-btn { width: 100%; text-align: center; align-self: stretch; }
+  .exam-item-actions, .exam-edit-actions { flex-direction: column; }
+  .edit-exam-btn, .delete-exam-btn, .save-edit-btn, .cancel-edit-btn { width: 100%; }
 }

@@ -1,24 +1,21 @@
 const ExamTimetable = require('../models/examSchema');
 
-
+/* ── Add exam(s) to a timetable (existing, unchanged) ── */
 const addTimetable = async (req, res) => {
   try {
-     console.log(req.body);
+    console.log(req.body);
     const { branch, semester, exams } = req.body;
 
-    // Step 1: Check if timetable exists
     const existingTimetable = await ExamTimetable.findOne({ branch, semester });
 
     if (existingTimetable) {
-      // Step 2: Get existing subjects
       const existingSubjects = existingTimetable.exams.map(
-  exam => exam.subject?.toLowerCase()
-);
+        exam => exam.subject?.toLowerCase()
+      );
 
-      // Step 3: Check if any subject is already scheduled
       const duplicateExam = exams.find(
-  exam => existingSubjects.includes(exam.subject?.toLowerCase())
-);
+        exam => existingSubjects.includes(exam.subject?.toLowerCase())
+      );
 
       if (duplicateExam) {
         return res.status(400).json({
@@ -26,7 +23,6 @@ const addTimetable = async (req, res) => {
         });
       }
 
-      // Step 4: Add new exams to existing timetable
       existingTimetable.exams.push(...exams);
       await existingTimetable.save();
 
@@ -36,7 +32,6 @@ const addTimetable = async (req, res) => {
       });
     }
 
-    // Step 5: If no timetable exists, create a new one
     const newTimetable = new ExamTimetable({ branch, semester, exams });
     await newTimetable.save();
 
@@ -45,22 +40,19 @@ const addTimetable = async (req, res) => {
       timetable: newTimetable,
     });
   } catch (error) {
-
-  console.log(error);
-
-  res.status(500).json({
-    message: 'Error adding timetable',
-    error: error.message
-  });
-}
+    console.log(error);
+    res.status(500).json({
+      message: 'Error adding timetable',
+      error: error.message
+    });
+  }
 };
 
-// Controller to get timetable based on branch and semester
+/* ── Get timetable (existing, unchanged) ── */
 const getTimetable = async (req, res) => {
   try {
     const { branch, semester } = req.query;
 
-    // Fetch the timetable for the specified branch and semester
     const timetable = await ExamTimetable.findOne({ branch, semester });
     if (!timetable) {
       return res.status(404).json({ message: 'No timetable found for this branch and semester.' });
@@ -72,4 +64,72 @@ const getTimetable = async (req, res) => {
   }
 };
 
-module.exports = { addTimetable, getTimetable };
+/* ── NEW: Update a single exam inside a timetable ── */
+const updateExam = async (req, res) => {
+  try {
+    const { branch, semester, examId } = req.params;
+    const { subject, date, startTime, endTime } = req.body;
+
+    const timetable = await ExamTimetable.findOne({ branch, semester });
+    if (!timetable) {
+      return res.status(404).json({ message: 'Timetable not found.' });
+    }
+
+    const exam = timetable.exams.id(examId);
+    if (!exam) {
+      return res.status(404).json({ message: 'Exam not found in this timetable.' });
+    }
+
+    // Prevent duplicate subject (excluding the exam being edited)
+    const duplicate = timetable.exams.find(
+      (e) => e._id.toString() !== examId && e.subject?.toLowerCase() === subject?.toLowerCase()
+    );
+    if (duplicate) {
+      return res.status(400).json({ message: `Subject "${subject}" is already scheduled.` });
+    }
+
+    // Validate start/end time if both provided
+    if (startTime && endTime && startTime >= endTime) {
+      return res.status(400).json({ message: 'Start time must be before end time.' });
+    }
+
+    if (subject !== undefined) exam.subject = subject;
+    if (date !== undefined) exam.date = date;
+    if (startTime !== undefined) exam.startTime = startTime;
+    if (endTime !== undefined) exam.endTime = endTime;
+
+    await timetable.save();
+
+    res.status(200).json({ message: 'Exam updated successfully!', timetable });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error updating exam', error: error.message });
+  }
+};
+
+/* ── NEW: Delete a single exam from a timetable ── */
+const deleteExam = async (req, res) => {
+  try {
+    const { branch, semester, examId } = req.params;
+
+    const timetable = await ExamTimetable.findOne({ branch, semester });
+    if (!timetable) {
+      return res.status(404).json({ message: 'Timetable not found.' });
+    }
+
+    const exam = timetable.exams.id(examId);
+    if (!exam) {
+      return res.status(404).json({ message: 'Exam not found in this timetable.' });
+    }
+
+    exam.deleteOne(); // removes subdocument from the array
+    await timetable.save();
+
+    res.status(200).json({ message: 'Exam deleted successfully!', timetable });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error deleting exam', error: error.message });
+  }
+};
+
+module.exports = { addTimetable, getTimetable, updateExam, deleteExam };

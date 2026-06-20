@@ -13,7 +13,7 @@ const submitUserDetails = require("../Controllers/SubmitUserDetails");
 const getuserProfile = require("../Controllers/userProfile");
 const updateUserProfile = require('../Controllers/updateUserProfile');
 const { markAttendance, saveOtp, viewAttendance } = require("../Controllers/attendance");
-const {addTimetable,getTimetable}=require('../Controllers/exam.js');
+const {addTimetable,getTimetable,updateExam,deleteExam}=require('../Controllers/exam.js');
 const { createOrUpdateTimetable, updateDaySchedule, getTt } = require('../Controllers/timetable.js');
 const { getAllAssignments } = require('../Controllers/getAllAssignments');
 const { addSubmission } = require('../Controllers/addSubmission');
@@ -33,6 +33,12 @@ const {
 } = require('../Controllers/getUserByEmail');
 const logoutUser = require("../Controllers/logoutUser");
 const deleteAccount = require("../Controllers/deleteAccount");
+const aiController = require("../Controllers/aiController");
+const streakController = require('../Controllers/streakController');
+const achievementController = require('../Controllers/achievementController');
+const challengeController = require('../Controllers/challengeController');
+const healthScoreController = require('../Controllers/healthScoreController');
+ 
 
 //---------------------------- AUTH ROUTES ----------------------------//
 router.post('/register', registerUser);
@@ -55,6 +61,8 @@ router.put('/updateDaySchedule/:semester/:branch/:day', updateDaySchedule);
 router.post('/addTimetable', addTimetable);
 router.get('/getTimetable', getTimetable);
 router.get('/getTt/:semester/:branch', getTt);
+router.put('/updateExam/:branch/:semester/:examId', updateExam);
+router.delete('/deleteExam/:branch/:semester/:examId', deleteExam);
 
 //---------------------------- SYLLABUS ROUTES ----------------------------//
 router.post('/syllabus', addSyllabus);
@@ -76,6 +84,7 @@ router.post('/goals', goalController.createGoal);
 router.get('/goals/:userId', goalController.getGoalsByUser);
 router.put('/goals/:id', goalController.updateGoal);
 router.delete('/goals/:id', goalController.deleteGoal);
+router.patch('/goals/:id/toggle', goalController.toggleGoal);
 
 //---------------------------- MEETING ROUTES ----------------------------//
 router.post('/meeting/create', createMeeting);
@@ -197,5 +206,28 @@ router.use((req, res, next) => {
 router.post("/logout", logoutUser);
 // routes/user.js (replace current line)
 router.delete("/delete-account", deleteAccount);
+
+
+//---------------------------- AI ROUTES ----------------------------//
+router.post(
+  "/ai/chat",
+  aiController.chat
+);
+
+// ---------------------------- STUDY STREAK ROUTES ---------------------------- //
+router.get('/streak/:userId', streakController.getStreak);
+router.post('/streak/:userId/ping', streakController.pingActivity);
+ 
+// ---------------------------- ACHIEVEMENTS ROUTES ---------------------------- //
+router.get('/achievements/:userId', achievementController.getAchievements);
+ 
+// ---------------------------- DAILY CHALLENGE ROUTES ---------------------------- //
+router.get('/challenge/today', challengeController.getTodayChallenge);
+router.post('/challenge/:userId/attempt', challengeController.submitAttempt);
+router.get('/challenge/:userId/attempt-today', challengeController.getTodayAttempt);
+ 
+// ---------------------------- ACADEMIC HEALTH SCORE ROUTE ---------------------------- //
+router.get('/health-score/:userId', healthScoreController.getHealthScore);
+ 
 
 module.exports = router;
